@@ -1,14 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:loc="using:InfoPanel.Localization"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="InfoPanel.Views.Pages.DevicesPage">
 
     <ScrollViewer>
         <StackPanel Margin="24" Spacing="16">
             <DockPanel>
-                <Button DockPanel.Dock="Right" x:Name="ScanButton" Content="Scan for devices" Click="Scan_Click" />
+                <Button DockPanel.Dock="Right" x:Name="ScanButton" Content="{loc:Tr S8a778ed913d0}" Click="Scan_Click" />
                 <StackPanel Spacing="4">
-                    <TextBlock Text="Devices" FontSize="28" FontWeight="SemiBold" />
-                    <TextBlock Text="USB LCD panels and where each profile is shown."
+                    <TextBlock Text="{loc:Tr S4ba5121d4d1b}" FontSize="28" FontWeight="SemiBold" />
+                    <TextBlock Text="{loc:Tr S957299b89ef4}"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </StackPanel>
             </DockPanel>

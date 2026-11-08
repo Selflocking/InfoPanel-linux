@@ -1,4 +1,5 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:loc="using:InfoPanel.Localization"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:ui="using:FluentAvalonia.UI.Controls"
              xmlns:vm="using:InfoPanel.ViewModels"
@@ -37,8 +38,8 @@
                     </LinearGradientBrush>
                 </Border.Background>
                 <StackPanel VerticalAlignment="Center" Margin="32,0" Spacing="4">
-                    <TextBlock Text="Welcome to InfoPanel Linux" FontSize="30" FontWeight="Bold" />
-                    <TextBlock Text="Level UP your Dashboards" FontSize="15" Opacity="0.75" />
+                    <TextBlock Text="{loc:Tr S899b7b8d3c5d}" FontSize="30" FontWeight="Bold" />
+                    <TextBlock Text="{loc:Tr S6f2aa46b2530}" FontSize="15" Opacity="0.75" />
                 </StackPanel>
             </Border>
 
@@ -51,8 +52,8 @@
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="Edit" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
                             <TextBlock DockPanel.Dock="Right" Text="›" FontSize="18" Opacity="0.5" VerticalAlignment="Center" />
                             <StackPanel Spacing="2">
-                                <TextBlock Text="Designer" FontWeight="SemiBold" />
-                                <TextBlock Text="Customisation and design." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S8b6d8e40753a}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr Se9aa9cb9edd4}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -63,8 +64,8 @@
                                       Data="M3.75,4 H20.25 C21.216,4 22,4.784 22,5.75 V14.75 C22,15.716 21.216,16.5 20.25,16.5 H3.75 C2.784,16.5 2,15.716 2,14.75 V5.75 C2,4.784 2.784,4 3.75,4 Z M3.5,5.75 V14.75 C3.5,14.888 3.612,15 3.75,15 H20.25 C20.388,15 20.5,14.888 20.5,14.75 V5.75 C20.5,5.612 20.388,5.5 20.25,5.5 H3.75 C3.612,5.5 3.5,5.612 3.5,5.75 Z M11.25,16.5 H12.75 V18.5 H16.75 C17.164,18.5 17.5,18.836 17.5,19.25 C17.5,19.664 17.164,20 16.75,20 H7.25 C6.836,20 6.5,19.664 6.5,19.25 C6.5,18.836 6.836,18.5 7.25,18.5 H11.25 Z" />
                             <TextBlock DockPanel.Dock="Right" Text="›" FontSize="18" Opacity="0.5" VerticalAlignment="Center" />
                             <StackPanel Spacing="2">
-                                <TextBlock Text="Devices" FontWeight="SemiBold" />
-                                <TextBlock Text="USB panels, outputs and hotkeys." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S4ba5121d4d1b}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr S2ba3fb5952ab}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -73,8 +74,8 @@
                             <PathIcon DockPanel.Dock="Left" Width="18" Height="18" VerticalAlignment="Center" Margin="0,0,14,0" Data="M3,14.5 A9,9 0 0 1 21,14.5 L19.5,14.5 A7.5,7.5 0 0 0 4.5,14.5 Z M10.9,12.48 L7.66,9.24 L6.74,10.16 L9.98,13.4 Z M10.4,14.5 A1.6,1.6 0 1 0 13.6,14.5 A1.6,1.6 0 1 0 10.4,14.5 Z" />
                             <TextBlock DockPanel.Dock="Right" Text="›" FontSize="18" Opacity="0.5" VerticalAlignment="Center" />
                             <StackPanel Spacing="2">
-                                <TextBlock Text="Sensors" FontWeight="SemiBold" />
-                                <TextBlock Text="Browse live hardware and plugin sensors." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S76140e34f635}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr Sf768610c792e}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -83,8 +84,8 @@
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="AllApps" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
                             <TextBlock DockPanel.Dock="Right" Text="›" FontSize="18" Opacity="0.5" VerticalAlignment="Center" />
                             <StackPanel Spacing="2">
-                                <TextBlock Text="Plugins" FontWeight="SemiBold" />
-                                <TextBlock Text="Manage plugins and their configuration." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S9514b7ff4860}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr S0dd8557f84ce}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Button>
@@ -94,55 +95,55 @@
                     <Border Classes="communityrow">
                         <DockPanel>
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="Help" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
-                            <Button DockPanel.Dock="Right" Content="Read" VerticalAlignment="Center"
+                            <Button DockPanel.Dock="Right" Content="{loc:Tr S9b9a8d05a7ec}" VerticalAlignment="Center"
                                     Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux/blob/main/docs/USER-GUIDE.md" />
                             <StackPanel Spacing="2" VerticalAlignment="Center">
-                                <TextBlock Text="User Guide" FontWeight="SemiBold" />
-                                <TextBlock Text="Learn how to build profiles and set up your panels." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr Sd131ef7f9b5e}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr S99db2ad814dc}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Border>
                     <Border Classes="communityrow">
                         <DockPanel>
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="Star" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
-                            <Button DockPanel.Dock="Right" Content="Donate" VerticalAlignment="Center"
+                            <Button DockPanel.Dock="Right" Content="{loc:Tr Sc91ee0f2799d}" VerticalAlignment="Center"
                                     Click="OpenLink_Click" Tag="https://buymeacoffee.com/emaspa" />
                             <StackPanel Spacing="2" VerticalAlignment="Center">
-                                <TextBlock Text="Support Development" FontWeight="SemiBold" />
-                                <TextBlock Text="Show your appreciation and buy me a coffee." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S8f1b9fff870e}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr Sd564124edd65}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Border>
                     <Border Classes="communityrow">
                         <DockPanel>
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="People" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
-                            <Button DockPanel.Dock="Right" Content="Join" VerticalAlignment="Center"
+                            <Button DockPanel.Dock="Right" Content="{loc:Tr Sfd30fe681b4b}" VerticalAlignment="Center"
                                     Click="OpenLink_Click" Tag="https://discord.gg/cQnjdMC7Qc" />
                             <StackPanel Spacing="2" VerticalAlignment="Center">
-                                <TextBlock Text="Discord" FontWeight="SemiBold" />
-                                <TextBlock Text="Join in conversations with others regarding InfoPanel." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr S053bc65874ad}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr S5ce139c808cf}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Border>
                     <Border Classes="communityrow">
                         <DockPanel>
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="Comment" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
-                            <Button DockPanel.Dock="Right" Content="Launch" VerticalAlignment="Center"
+                            <Button DockPanel.Dock="Right" Content="{loc:Tr Sccf56ef5db0b}" VerticalAlignment="Center"
                                     Click="OpenLink_Click" Tag="https://www.reddit.com/r/InfoPanel/" />
                             <StackPanel Spacing="2" VerticalAlignment="Center">
-                                <TextBlock Text="Reddit" FontWeight="SemiBold" />
-                                <TextBlock Text="Help grow the /r/InfoPanel community." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr Seb0050f72303}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr S9fdb9fb1ab82}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Border>
                     <Border Classes="communityrow">
                         <DockPanel>
                             <ui:FASymbolIcon DockPanel.Dock="Left" Symbol="Code" FontSize="18" VerticalAlignment="Center" Margin="0,0,14,0" />
-                            <Button DockPanel.Dock="Right" Content="Open" VerticalAlignment="Center"
+                            <Button DockPanel.Dock="Right" Content="{loc:Tr Sed077f3d8125}" VerticalAlignment="Center"
                                     Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux" />
                             <StackPanel Spacing="2" VerticalAlignment="Center">
-                                <TextBlock Text="GitHub" FontWeight="SemiBold" />
-                                <TextBlock Text="Star the project, report issues and contribute." FontSize="12" Opacity="0.6" />
+                                <TextBlock Text="{loc:Tr Sf911e414cf6b}" FontWeight="SemiBold" />
+                                <TextBlock Text="{loc:Tr Sc1c703122f0d}" FontSize="12" Opacity="0.6" />
                             </StackPanel>
                         </DockPanel>
                     </Border>
@@ -152,12 +153,12 @@
             <!-- Profiles -->
             <DockPanel Margin="0,8,0,0">
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Spacing="8">
-                    <Button Content="Import…" Click="Import_Click" />
-                    <Button Content="+ New profile" Click="NewProfile_Click" />
+                    <Button Content="{loc:Tr Sea94509e38cf}" Click="Import_Click" />
+                    <Button Content="{loc:Tr S410ca2b818ea}" Click="NewProfile_Click" />
                 </StackPanel>
                 <StackPanel Spacing="4">
-                    <TextBlock Text="Profiles" FontSize="22" FontWeight="SemiBold" />
-                    <TextBlock Text="Create and manage your profiles and where they are shown."
+                    <TextBlock Text="{loc:Tr S535e52e4a261}" FontSize="22" FontWeight="SemiBold" />
+                    <TextBlock Text="{loc:Tr Sccb850b93bd8}"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                 </StackPanel>
             </DockPanel>
@@ -190,75 +191,75 @@
                                         </StackPanel>
                                     </DockPanel>
                                     <StackPanel Orientation="Horizontal" Spacing="8">
-                                        <Button Content="Duplicate" Click="Duplicate_Click" Tag="{Binding}" />
-                                        <Button Content="Delete" Click="Delete_Click" Tag="{Binding}" />
-                                        <Button Content="Export" Click="Export_Click" Tag="{Binding}" />
+                                        <Button Content="{loc:Tr S02cdaabfca80}" Click="Duplicate_Click" Tag="{Binding}" />
+                                        <Button Content="{loc:Tr Se2d0a54968ea}" Click="Delete_Click" Tag="{Binding}" />
+                                        <Button Content="{loc:Tr S3664895579f0}" Click="Export_Click" Tag="{Binding}" />
                                     </StackPanel>
 
-                                    <Expander Header="Profile settings" FontSize="12"
+                                    <Expander Header="{loc:Tr Seb67fa8c8955}" FontSize="12"
                                               IsExpanded="{Binding IsSettingsExpanded, Mode=TwoWay}"
                                               HorizontalAlignment="Stretch">
                                         <StackPanel Spacing="8" Margin="0,8,0,0">
                                             <StackPanel Spacing="2">
-                                                <TextBlock Text="Name" FontSize="10" Opacity="0.7" />
+                                                <TextBlock Text="{loc:Tr Sdcd1d5223f73}" FontSize="10" Opacity="0.7" />
                                                 <TextBox Text="{Binding Profile.Name, Mode=TwoWay}" />
                                             </StackPanel>
                                             <Grid ColumnDefinitions="*,8,*">
                                                 <StackPanel Grid.Column="0" Spacing="2">
-                                                    <TextBlock Text="Width" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S3019947b6daf}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.Width, Mode=TwoWay}" Minimum="1" Maximum="10000" Increment="1" FormatString="0" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" Spacing="2">
-                                                    <TextBlock Text="Height" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr Sbfe2eca40179}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.Height, Mode=TwoWay}" Minimum="1" Maximum="10000" Increment="1" FormatString="0" />
                                                 </StackPanel>
                                             </Grid>
                                             <Grid ColumnDefinitions="*,8,*">
                                                 <StackPanel Grid.Column="0" Spacing="2">
-                                                    <TextBlock Text="Background" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr Sea2b8a878841}" FontSize="10" Opacity="0.7" />
                                                     <ColorPicker Color="{Binding Profile.BackgroundColor, Mode=TwoWay, Converter={x:Static utils:ColorHexConverter.Instance}}" HorizontalAlignment="Stretch" Height="30" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" Spacing="2">
-                                                    <TextBlock Text="Text color" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S4a69d0166046}" FontSize="10" Opacity="0.7" />
                                                     <ColorPicker Color="{Binding Profile.Color, Mode=TwoWay, Converter={x:Static utils:ColorHexConverter.Instance}}" HorizontalAlignment="Stretch" Height="30" />
                                                 </StackPanel>
                                             </Grid>
                                             <StackPanel Spacing="2">
-                                                <TextBlock Text="Display" FontSize="10" Opacity="0.7" />
+                                                <TextBlock Text="{loc:Tr S34e108c0896d}" FontSize="10" Opacity="0.7" />
                                                 <ComboBox ItemsSource="{Binding DisplayChoices}" SelectedItem="{Binding DisplaySelection, Mode=TwoWay}" MaxDropDownHeight="360" HorizontalAlignment="Stretch" />
                                             </StackPanel>
                                             <StackPanel Spacing="2">
-                                                <TextBlock Text="Font" FontSize="10" Opacity="0.7" />
+                                                <TextBlock Text="{loc:Tr S64d0b3adcd2d}" FontSize="10" Opacity="0.7" />
                                                 <ComboBox ItemsSource="{Binding FontChoices}" SelectedItem="{Binding FontSelection, Mode=TwoWay}" MaxDropDownHeight="360" HorizontalAlignment="Stretch" />
                                             </StackPanel>
                                             <Grid ColumnDefinitions="*,8,*">
                                                 <StackPanel Grid.Column="0" Spacing="2">
-                                                    <TextBlock Text="Font size" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S6d784d95c638}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.FontSize, Mode=TwoWay}" Minimum="1" Maximum="200" Increment="1" FormatString="0" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" Spacing="2">
-                                                    <TextBlock Text="Font scale" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S8112fa23b031}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.FontScale, Mode=TwoWay}" Minimum="0.1" Maximum="10" Increment="0.01" FormatString="0.00" />
                                                 </StackPanel>
                                             </Grid>
                                             <Grid ColumnDefinitions="*,8,*,8,Auto">
                                                 <StackPanel Grid.Column="0" Spacing="2">
-                                                    <TextBlock Text="Overlay X" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S0e00f4d1067f}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.WindowX, Mode=TwoWay}" Increment="1" FormatString="0" />
                                                 </StackPanel>
                                                 <StackPanel Grid.Column="2" Spacing="2">
-                                                    <TextBlock Text="Overlay Y" FontSize="10" Opacity="0.7" />
+                                                    <TextBlock Text="{loc:Tr S764b5cb69729}" FontSize="10" Opacity="0.7" />
                                                     <NumericUpDown Value="{Binding Profile.WindowY, Mode=TwoWay}" Increment="1" FormatString="0" />
                                                 </StackPanel>
-                                                <Button Grid.Column="4" Content="Reset" FontSize="11" VerticalAlignment="Bottom" Click="ResetPosition_Click" Tag="{Binding}" />
+                                                <Button Grid.Column="4" Content="{loc:Tr Sdaee7606b339}" FontSize="11" VerticalAlignment="Bottom" Click="ResetPosition_Click" Tag="{Binding}" />
                                             </Grid>
                                             <WrapPanel>
-                                                <CheckBox Content="Always on top" IsChecked="{Binding Profile.Topmost, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
-                                                <CheckBox Content="Draggable" IsChecked="{Binding Profile.Drag, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
-                                                <CheckBox Content="Resizable" IsChecked="{Binding Profile.Resize, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
-                                                <CheckBox Content="Show FPS" IsChecked="{Binding Profile.ShowFps, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
+                                                <CheckBox Content="{loc:Tr S56130e653e13}" IsChecked="{Binding Profile.Topmost, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
+                                                <CheckBox Content="{loc:Tr S8c907f8f2955}" IsChecked="{Binding Profile.Drag, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
+                                                <CheckBox Content="{loc:Tr Sb0c6f965d396}" IsChecked="{Binding Profile.Resize, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
+                                                <CheckBox Content="{loc:Tr Sf1a230ed2592}" IsChecked="{Binding Profile.ShowFps, Mode=TwoWay}" FontSize="12" Margin="0,0,8,0" />
                                             </WrapPanel>
-                                            <Button Content="Save profile" FontSize="12" Click="SaveProfile_Click" Tag="{Binding}" HorizontalAlignment="Stretch" />
+                                            <Button Content="{loc:Tr S0c8209e72ec8}" FontSize="12" Click="SaveProfile_Click" Tag="{Binding}" HorizontalAlignment="Stretch" />
                                         </StackPanel>
                                     </Expander>
                                 </StackPanel>

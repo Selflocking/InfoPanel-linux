@@ -110,8 +110,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.ThermalrightPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -136,8 +136,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.TuringPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -171,8 +171,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.BeadaPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -195,8 +195,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.ThermaltakePanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -219,8 +219,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.JlPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -243,8 +243,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.VmaxPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -267,14 +267,22 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.ValkyriePanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
                 AddPanelOptions(device.Brightness, b => { device.Brightness = b; _app.Host.SaveSettings(); },
                     device.TargetFrameRate, f => { device.TargetFrameRate = f; _app.Host.SaveSettings(); },
                     null, null);
+                if (device.Model == VmaxPanelModel.ValkyrieVk03)
+                {
+                    var landscape = device.Rotation is Models.LCD_ROTATION.Rotate90FlipNone or Models.LCD_ROTATION.Rotate270FlipNone;
+                    AddMatchingProfileButton(device.ModelInfo!.Name,
+                        landscape ? device.DisplayHeight : device.DisplayWidth,
+                        landscape ? device.DisplayWidth : device.DisplayHeight,
+                        g => { device.ProfileGuid = g; _app.Host.SaveSettings(); });
+                }
             }
 
             AddFamilyHeader("Jonsbo", settings.JonsboPanelMultiDeviceMode,
@@ -291,8 +299,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.JonsboPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -321,8 +329,8 @@ namespace InfoPanel.Views.Pages
                     setProfile: g => { device.ProfileGuid = g; _app.Host.SaveSettings(); },
                     status: () => device.RuntimeProperties.IsRunning
                         ? RunningStatus(device.ProfileGuid, device.RuntimeProperties.FrameRate, device.RuntimeProperties.FrameTime)
-                        : !device.Enabled ? "disabled"
-                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : "idle",
+                        : !device.Enabled ? Localization.Localizer.Text(Localization.Localizer.Text("disabled"))
+                        : device.RuntimeProperties.ErrorMessage is { Length: > 0 } err ? err : Localization.Localizer.Text(Localization.Localizer.Text("idle")),
                     remove: () => { settings.LianLiPanelDevices.Remove(device); _app.Host.SaveSettings(); RebuildRows(); },
                     rotation: device.Rotation,
                     setRotation: r => { device.Rotation = r; _app.Host.SaveSettings(); });
@@ -346,10 +354,10 @@ namespace InfoPanel.Views.Pages
         private void AddHotkeysSection(Settings settings)
         {
             var header = new DockPanel { Margin = new Thickness(0, 8, 0, 0) };
-            var addButton = new Button { Content = "Add hotkey" };
+            var addButton = new Button { Content = InfoPanel.Localization.Localizer.Text("Add hotkey") };
             DockPanel.SetDock(addButton, Dock.Right);
             header.Children.Add(addButton);
-            header.Children.Add(new TextBlock { Text = "Profile hotkeys", FontSize = 18, FontWeight = Avalonia.Media.FontWeight.SemiBold, VerticalAlignment = VerticalAlignment.Center });
+            header.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Profile hotkeys"), FontSize = 18, FontWeight = Avalonia.Media.FontWeight.SemiBold, VerticalAlignment = VerticalAlignment.Center });
             DeviceRows.Children.Add(header);
 
             var caption = Services.HotkeyManager.IsAvailable
@@ -416,8 +424,8 @@ namespace InfoPanel.Views.Pages
             panel.Children.Add(captures);
 
             var info = new StackPanel { Spacing = 2, VerticalAlignment = VerticalAlignment.Center };
-            info.Children.Add(new TextBlock { Text = "Stopwatch", FontWeight = Avalonia.Media.FontWeight.SemiBold });
-            info.Children.Add(new TextBlock { Text = "Global start/stop/reset for the bundled Stopwatch plugin.", FontSize = 11, Opacity = 0.6 });
+            info.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Stopwatch"), FontWeight = Avalonia.Media.FontWeight.SemiBold });
+            info.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Global start/stop/reset for the bundled Stopwatch plugin."), FontSize = 11, Opacity = 0.6 });
             panel.Children.Add(info);
 
             border.Child = panel;
@@ -443,7 +451,7 @@ namespace InfoPanel.Views.Pages
 
             button.IsCheckedChanged += (_, _) =>
             {
-                if (button.IsChecked == true) button.Content = "Press keys…";
+                if (button.IsChecked == true) button.Content = InfoPanel.Localization.Localizer.Text("Press keys…");
             };
             button.KeyDown += (_, e) =>
             {
@@ -605,7 +613,7 @@ namespace InfoPanel.Views.Pages
         {
             var expander = new Expander
             {
-                Header = "Panel options",
+                Header = InfoPanel.Localization.Localizer.Text("Panel options"),
                 Margin = new Thickness(24, -8, 0, 0),
                 FontSize = 12,
             };
@@ -613,14 +621,14 @@ namespace InfoPanel.Views.Pages
             var panel = new StackPanel { Spacing = 8, Margin = new Thickness(0, 8, 0, 0) };
 
             var brightnessRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-            brightnessRow.Children.Add(new TextBlock { Text = "Brightness", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+            brightnessRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Brightness"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
             var brightnessSlider = new Slider { Minimum = 5, Maximum = 100, Value = brightness, Width = 200 };
             brightnessSlider.ValueChanged += (_, _) => setBrightness((int)brightnessSlider.Value);
             brightnessRow.Children.Add(brightnessSlider);
             panel.Children.Add(brightnessRow);
 
             var fpsRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-            fpsRow.Children.Add(new TextBlock { Text = "Target FPS", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+            fpsRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Target FPS"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
             var fps = new NumericUpDown { Minimum = 1, Maximum = 60, Value = targetFps, Increment = 1, FormatString = "0" };
             fps.ValueChanged += (_, _) => setTargetFps((int)(fps.Value ?? 15));
             fpsRow.Children.Add(fps);
@@ -629,7 +637,7 @@ namespace InfoPanel.Views.Pages
             if (jpegQuality != null && setJpegQuality != null)
             {
                 var qualityRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-                qualityRow.Children.Add(new TextBlock { Text = "JPEG quality", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+                qualityRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("JPEG quality"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
                 var quality = new NumericUpDown { Minimum = 50, Maximum = 100, Value = jpegQuality, Increment = 5, FormatString = "0" };
                 quality.ValueChanged += (_, _) => setJpegQuality((int)(quality.Value ?? 90));
                 qualityRow.Children.Add(quality);
@@ -644,7 +652,7 @@ namespace InfoPanel.Views.Pages
         {
             var expander = new Expander
             {
-                Header = "Panel options",
+                Header = InfoPanel.Localization.Localizer.Text("Panel options"),
                 Margin = new Thickness(24, -8, 0, 0),
                 FontSize = 12,
             };
@@ -652,14 +660,14 @@ namespace InfoPanel.Views.Pages
             var panel = new StackPanel { Spacing = 8, Margin = new Thickness(0, 8, 0, 0) };
 
             var brightnessRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-            brightnessRow.Children.Add(new TextBlock { Text = "Brightness", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+            brightnessRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Brightness"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
             var brightness = new Slider { Minimum = 5, Maximum = 100, Value = device.Brightness, Width = 200 };
             brightness.ValueChanged += (_, _) => { device.Brightness = (int)brightness.Value; _app?.Host.SaveSettings(); };
             brightnessRow.Children.Add(brightness);
             panel.Children.Add(brightnessRow);
 
             var fpsRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-            fpsRow.Children.Add(new TextBlock { Text = "Target FPS", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+            fpsRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Target FPS"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
             var fps = new NumericUpDown { Minimum = 1, Maximum = 60, Value = device.TargetFrameRate, Increment = 1, FormatString = "0" };
             fps.ValueChanged += (_, _) => { device.TargetFrameRate = (int)(fps.Value ?? 15); _app?.Host.SaveSettings(); };
             fpsRow.Children.Add(fps);
@@ -668,7 +676,7 @@ namespace InfoPanel.Views.Pages
             if (device.IsJpegQualityConfigurable)
             {
                 var qualityRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-                qualityRow.Children.Add(new TextBlock { Text = "JPEG quality", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+                qualityRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("JPEG quality"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
                 var quality = new NumericUpDown { Minimum = 50, Maximum = 100, Value = device.JpegQuality, Increment = 5, FormatString = "0" };
                 quality.ValueChanged += (_, _) => { device.JpegQuality = (int)(quality.Value ?? 95); _app?.Host.SaveSettings(); };
                 qualityRow.Children.Add(quality);
@@ -679,8 +687,8 @@ namespace InfoPanel.Views.Pages
             {
                 var flicker = new ToggleSwitch
                 {
-                    OnContent = "Flicker fix (crop to 462 rows)",
-                    OffContent = "Flicker fix (crop to 462 rows)",
+                    OnContent = InfoPanel.Localization.Localizer.Text("Flicker fix (crop to 462 rows)"),
+                    OffContent = InfoPanel.Localization.Localizer.Text("Flicker fix (crop to 462 rows)"),
                     IsChecked = device.FlickerFix,
                 };
                 flicker.IsCheckedChanged += (_, _) => { device.FlickerFix = flicker.IsChecked == true; _app?.Host.SaveSettings(); };
@@ -690,7 +698,7 @@ namespace InfoPanel.Views.Pages
             if (device.HasDisplayMask)
             {
                 var maskRow = new DockPanel { MaxWidth = 380, HorizontalAlignment = HorizontalAlignment.Left };
-                maskRow.Children.Add(new TextBlock { Text = "Display mask", VerticalAlignment = VerticalAlignment.Center, Width = 110 });
+                maskRow.Children.Add(new TextBlock { Text = InfoPanel.Localization.Localizer.Text("Display mask"), VerticalAlignment = VerticalAlignment.Center, Width = 110 });
                 var mask = new ComboBox
                 {
                     ItemsSource = new[] { "None", "Rounded left", "Rounded all" },
@@ -725,7 +733,7 @@ namespace InfoPanel.Views.Pages
 
             var button = new Button
             {
-                Content = $"Create matching {width}×{height} profile",
+                Content = Localization.Localizer.Text("Create matching {0}×{1} profile", width, height),
                 FontSize = 11,
                 Margin = new Thickness(24, -6, 0, 0),
             };
@@ -754,8 +762,8 @@ namespace InfoPanel.Views.Pages
             var panel = new DockPanel { Margin = new Thickness(0, 8, 0, 0) };
             var toggle = new ToggleSwitch
             {
-                OnContent = "Streaming enabled",
-                OffContent = "Streaming disabled",
+                OnContent = InfoPanel.Localization.Localizer.Text("Streaming enabled"),
+                OffContent = InfoPanel.Localization.Localizer.Text("Streaming disabled"),
                 IsChecked = multiMode,
             };
             toggle.IsCheckedChanged += (_, _) => setMultiMode(toggle.IsChecked == true);
@@ -806,7 +814,7 @@ namespace InfoPanel.Views.Pages
                 ItemsSource = _app!.Host.Profiles,
                 SelectedItem = _app.Host.Profiles.FirstOrDefault(p => p.Guid == profileGuid),
                 DisplayMemberBinding = new Avalonia.Data.Binding(nameof(Profile.Name)),
-                PlaceholderText = "Assign profile…",
+                PlaceholderText = InfoPanel.Localization.Localizer.Text("Assign profile…"),
             };
             profilePicker.SelectionChanged += (_, _) =>
             {
@@ -845,7 +853,7 @@ namespace InfoPanel.Views.Pages
             enabled.IsCheckedChanged += (_, _) => setEnabled(enabled.IsChecked == true);
             AddCell(enabled);
 
-            var removeButton = new Button { Content = "Remove", VerticalAlignment = VerticalAlignment.Center };
+            var removeButton = new Button { Content = InfoPanel.Localization.Localizer.Text("Remove"), VerticalAlignment = VerticalAlignment.Center };
             removeButton.Click += (_, _) => remove();
             AddCell(removeButton);
 
@@ -859,7 +867,7 @@ namespace InfoPanel.Views.Pages
 
             ScanButton.IsEnabled = false;
             ScanStatus.IsVisible = true;
-            ScanStatus.Text = "Scanning…";
+            ScanStatus.Text = InfoPanel.Localization.Localizer.Text("Scanning…");
 
             try
             {
@@ -1079,14 +1087,14 @@ namespace InfoPanel.Views.Pages
                     settings.LianLiPanelMultiDeviceMode = true;
 
                 _app.Host.SaveSettings();
-                ScanStatus.Text = $"Scan complete: {added} new, {updated} known device(s)."
+                ScanStatus.Text = Localization.Localizer.Text("Scan complete: {0} new, {1} known device(s).", added, updated)
                     + (scanIssues.Count > 0 ? " " + string.Join(" ", scanIssues.Distinct()) : "");
                 RebuildRows();
             }
             catch (Exception ex)
             {
                 Logger.Error(ex, "Device scan failed");
-                ScanStatus.Text = $"Scan failed: {ex.Message}";
+                ScanStatus.Text = Localization.Localizer.Text("Scan failed: {0}", ex.Message);
             }
             finally
             {

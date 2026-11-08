@@ -78,18 +78,18 @@ namespace InfoPanel.Designer
                 var session = _session;
                 if (session == null || session.Selection.Count == 0)
                 {
-                    _root.Children.Add(Header("Profile"));
+                    _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Profile")));
                     if (session != null)
                     {
                         _root.Children.Add(Label($"{session.Profile.Name} - {session.Profile.Width}×{session.Profile.Height}"));
                         _root.Children.Add(Label($"{session.Items.Count} items"));
-                        _root.Children.Add(Label("Select an item to edit its properties."));
+                        _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Select an item to edit its properties.")));
 
                         var profile = session.Profile;
                         var triggers = new TextBox
                         {
                             Text = profile.TriggerProcessNames ?? "",
-                            Watermark = "e.g. Cyberpunk2077.exe, steam",
+                            Watermark = InfoPanel.Localization.Localizer.Text("e.g. Cyberpunk2077.exe, steam"),
                         };
                         triggers.LostFocus += (_, _) =>
                         {
@@ -98,8 +98,8 @@ namespace InfoPanel.Designer
                             profile.TriggerProcessNames = value;
                             (Avalonia.Application.Current as App)?.Host.SaveProfiles();
                         };
-                        _root.Children.Add(Field("Trigger programs", triggers));
-                        _root.Children.Add(Label("Comma-separated process names. When program-specific profiles are enabled in Settings, this overlay only shows while one of these apps is in the foreground."));
+                        _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Trigger programs"), triggers));
+                        _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Comma-separated process names. When program-specific profiles are enabled in Settings, this overlay only shows while one of these apps is in the foreground.")));
 
                         BuildDisplayAssignment(profile);
                     }
@@ -110,7 +110,7 @@ namespace InfoPanel.Designer
                 if (session.Selection.Count > 1)
                 {
                     _root.Children.Add(Header($"{session.Selection.Count} items selected"));
-                    _root.Children.Add(Label("Drag to move together; geometry edits apply per item."));
+                    _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Drag to move together; geometry edits apply per item.")));
                     return;
                 }
 
@@ -184,7 +184,7 @@ namespace InfoPanel.Designer
                         break;
 
                     case GroupDisplayItem group:
-                        _root.Children.Add(Header("Group"));
+                        _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Group")));
                         _root.Children.Add(Label($"{group.DisplayItemsCount} items in group"));
                         break;
                 }
@@ -213,7 +213,7 @@ namespace InfoPanel.Designer
             var combo = new ComboBox
             {
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                PlaceholderText = "Not assigned",
+                PlaceholderText = InfoPanel.Localization.Localizer.Text("Not assigned"),
             };
             foreach (var monitor in monitors)
             {
@@ -255,8 +255,8 @@ namespace InfoPanel.Designer
             profile.PropertyChanged += handler;
             _profileSectionCleanups.Add(() => profile.PropertyChanged -= handler);
 
-            _root.Children.Add(Field("Display", combo));
-            _root.Children.Add(Label("Assigns the overlay to a monitor, parked at its top-left. Dragging the overlay onto another screen updates this automatically."));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Display"), combo));
+            _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Assigns the overlay to a monitor, parked at its top-left. Dragging the overlay onto another screen updates this automatically.")));
         }
 
         private static MonitorInfo? FindAssignedMonitor(Profile profile, List<MonitorInfo> monitors)
@@ -269,19 +269,19 @@ namespace InfoPanel.Designer
         {
             _root.Children.Add(Header(item.Kind));
 
-            var name = new TextBox { Text = item.Name, Watermark = "Name" };
+            var name = new TextBox { Text = item.Name, Watermark = InfoPanel.Localization.Localizer.Text("Name") };
             name.LostFocus += (_, _) => Commit(session, item, nameof(item.Name), v => item.Name = v, item.Name, name.Text ?? "");
-            _root.Children.Add(Field("Name", name));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Name"), name));
 
             var grid = TwoColumns();
-            AddCell(grid, 0, 0, Field("X", IntEditor(item.X, v => Commit(session, item, "X", x => item.X = x, item.X, v))));
-            AddCell(grid, 0, 1, Field("Y", IntEditor(item.Y, v => Commit(session, item, "Y", y => item.Y = y, item.Y, v))));
+            AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("X"), IntEditor(item.X, v => Commit(session, item, "X", x => item.X = x, item.X, v))));
+            AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Y"), IntEditor(item.Y, v => Commit(session, item, "Y", y => item.Y = y, item.Y, v))));
 
             if (ItemGeometry.IsResizable(item))
             {
                 var (w, h) = ItemGeometry.GetSize(item);
-                AddCell(grid, 1, 0, Field("Width", IntEditor(w, v => CommitSize(session, item, width: v))));
-                AddCell(grid, 1, 1, Field("Height", IntEditor(h, v => CommitSize(session, item, height: v))));
+                AddCell(grid, 1, 0, Field(InfoPanel.Localization.Localizer.Text("Width"), IntEditor(w, v => CommitSize(session, item, width: v))));
+                AddCell(grid, 1, 1, Field(InfoPanel.Localization.Localizer.Text("Height"), IntEditor(h, v => CommitSize(session, item, height: v))));
             }
 
             _root.Children.Add(grid);
@@ -312,13 +312,13 @@ namespace InfoPanel.Designer
             var stepEditor = new NumericUpDown { Value = 1, Minimum = 1, Maximum = 100, Increment = 1, FormatString = "0", Width = 110 };
             stepEditor.ValueChanged += (_, e) => step = (int)(e.NewValue ?? 1);
             nudgeRow.Children.Add(stepEditor);
-            _root.Children.Add(Field("Nudge / step", nudgeRow));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Nudge / step"), nudgeRow));
 
-            _root.Children.Add(Field("Rotation", IntEditor(item.Rotation, v => Commit(session, item, nameof(item.Rotation), r => item.Rotation = r, item.Rotation, v), 0, 359)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Rotation"), IntEditor(item.Rotation, v => Commit(session, item, nameof(item.Rotation), r => item.Rotation = r, item.Rotation, v), 0, 359)));
 
             var row = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
-            row.Children.Add(Check("Hidden", item.Hidden, v => Commit(session, item, nameof(item.Hidden), x => item.Hidden = x, item.Hidden, v)));
-            row.Children.Add(Check("Locked", item.IsLocked, v => Commit(session, item, nameof(item.IsLocked), x => item.IsLocked = x, item.IsLocked, v)));
+            row.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Hidden"), item.Hidden, v => Commit(session, item, nameof(item.Hidden), x => item.Hidden = x, item.Hidden, v)));
+            row.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Locked"), item.IsLocked, v => Commit(session, item, nameof(item.IsLocked), x => item.IsLocked = x, item.IsLocked, v)));
             _root.Children.Add(row);
         }
 
@@ -353,7 +353,7 @@ namespace InfoPanel.Designer
 
         private void BuildBindButton(DisplayItem item)
         {
-            var bind = new Button { Content = "Bind selected sensor" };
+            var bind = new Button { Content = InfoPanel.Localization.Localizer.Text("Bind selected sensor") };
             bind.Click += (_, _) => BindSensorRequested?.Invoke(this, item);
             _root.Children.Add(bind);
         }
@@ -366,56 +366,56 @@ namespace InfoPanel.Designer
 
         private void BuildSensorSection(DesignerSession session, SensorDisplayItem sensor)
         {
-            _root.Children.Add(Header("Sensor"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Sensor")));
 
             var id = sensor.SensorType == Enums.SensorType.Plugin ? sensor.PluginSensorId : sensor.LibreSensorId;
             _root.Children.Add(Label(string.IsNullOrEmpty(id) ? "No sensor bound" : $"{sensor.SensorType}: {id}"));
             BuildSensorStatus(sensor);
             BuildBindButton(sensor);
 
-            _root.Children.Add(Field("Value type", EnumCombo(sensor.ValueType,
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Value type"), EnumCombo(sensor.ValueType,
                 v => Commit(session, sensor, nameof(sensor.ValueType), x => sensor.ValueType = x, sensor.ValueType, v))));
 
             var showRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 12 };
-            showRow.Children.Add(Check("Show name", sensor.ShowName, v => Commit(session, sensor, nameof(sensor.ShowName), x => sensor.ShowName = x, sensor.ShowName, v)));
-            showRow.Children.Add(Check("Show unit", sensor.ShowUnit, v => Commit(session, sensor, nameof(sensor.ShowUnit), x => sensor.ShowUnit = x, sensor.ShowUnit, v)));
-            showRow.Children.Add(Check("1,000s separator", sensor.ShowThousandsSeparator, v => Commit(session, sensor, nameof(sensor.ShowThousandsSeparator), x => sensor.ShowThousandsSeparator = x, sensor.ShowThousandsSeparator, v)));
+            showRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show name"), sensor.ShowName, v => Commit(session, sensor, nameof(sensor.ShowName), x => sensor.ShowName = x, sensor.ShowName, v)));
+            showRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show unit"), sensor.ShowUnit, v => Commit(session, sensor, nameof(sensor.ShowUnit), x => sensor.ShowUnit = x, sensor.ShowUnit, v)));
+            showRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("1,000s separator"), sensor.ShowThousandsSeparator, v => Commit(session, sensor, nameof(sensor.ShowThousandsSeparator), x => sensor.ShowThousandsSeparator = x, sensor.ShowThousandsSeparator, v)));
             _root.Children.Add(showRow);
 
             var multiplyRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
             multiplyRow.Children.Add(DoubleEditor(sensor.MultiplicationModifier, v => Commit(session, sensor, nameof(sensor.MultiplicationModifier), x => sensor.MultiplicationModifier = x, sensor.MultiplicationModifier, v), 0.1m, "0.00"));
-            multiplyRow.Children.Add(Check("Divide", sensor.DivisionToggle, v => Commit(session, sensor, nameof(sensor.DivisionToggle), x => sensor.DivisionToggle = x, sensor.DivisionToggle, v)));
-            _root.Children.Add(Field("Multiply", multiplyRow));
+            multiplyRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Divide"), sensor.DivisionToggle, v => Commit(session, sensor, nameof(sensor.DivisionToggle), x => sensor.DivisionToggle = x, sensor.DivisionToggle, v)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Multiply"), multiplyRow));
 
-            _root.Children.Add(Field("Add", DoubleEditor(sensor.AdditionModifier, v => Commit(session, sensor, nameof(sensor.AdditionModifier), x => sensor.AdditionModifier = x, sensor.AdditionModifier, v), 1m, "0.00")));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Add"), DoubleEditor(sensor.AdditionModifier, v => Commit(session, sensor, nameof(sensor.AdditionModifier), x => sensor.AdditionModifier = x, sensor.AdditionModifier, v), 1m, "0.00")));
 
             var precisionRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-            precisionRow.Children.Add(Check("Override precision", sensor.OverridePrecision, v => Commit(session, sensor, nameof(sensor.OverridePrecision), x => sensor.OverridePrecision = x, sensor.OverridePrecision, v)));
+            precisionRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Override precision"), sensor.OverridePrecision, v => Commit(session, sensor, nameof(sensor.OverridePrecision), x => sensor.OverridePrecision = x, sensor.OverridePrecision, v)));
             precisionRow.Children.Add(IntEditor(sensor.Precision, v => Commit(session, sensor, nameof(sensor.Precision), x => sensor.Precision = x, sensor.Precision, v), 0, 3));
             _root.Children.Add(precisionRow);
 
             var unitRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
-            unitRow.Children.Add(Check("Override unit", sensor.OverrideUnit, v => Commit(session, sensor, nameof(sensor.OverrideUnit), x => sensor.OverrideUnit = x, sensor.OverrideUnit, v)));
+            unitRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Override unit"), sensor.OverrideUnit, v => Commit(session, sensor, nameof(sensor.OverrideUnit), x => sensor.OverrideUnit = x, sensor.OverrideUnit, v)));
             var unitBox = new TextBox { Text = sensor.Unit, Width = 90 };
             unitBox.LostFocus += (_, _) => Commit(session, sensor, nameof(sensor.Unit), v => sensor.Unit = v, sensor.Unit, unitBox.Text ?? "");
             unitRow.Children.Add(unitBox);
             _root.Children.Add(unitRow);
 
-            _root.Children.Add(Header("Thresholds"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Thresholds")));
             var threshold1 = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
             threshold1.Children.Add(DoubleEditor(sensor.Threshold1, v => Commit(session, sensor, nameof(sensor.Threshold1), x => sensor.Threshold1 = x, sensor.Threshold1, v), 1m, "0.0"));
             threshold1.Children.Add(ColorEditor(session, sensor, nameof(sensor.Threshold1Color), sensor.Threshold1Color, v => sensor.Threshold1Color = v));
-            _root.Children.Add(Field("Level 1", threshold1));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Level 1"), threshold1));
 
             var threshold2 = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
             threshold2.Children.Add(DoubleEditor(sensor.Threshold2, v => Commit(session, sensor, nameof(sensor.Threshold2), x => sensor.Threshold2 = x, sensor.Threshold2, v), 1m, "0.0"));
             threshold2.Children.Add(ColorEditor(session, sensor, nameof(sensor.Threshold2Color), sensor.Threshold2Color, v => sensor.Threshold2Color = v));
-            _root.Children.Add(Field("Level 2", threshold2));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Level 2"), threshold2));
         }
 
         private void BuildTextSection(DesignerSession session, TextDisplayItem text)
         {
-            _root.Children.Add(Header("Text"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Text")));
 
             var fonts = SkiaSharp.SKFontManager.Default.FontFamilies.OrderBy(f => f).ToList();
             if (!string.IsNullOrEmpty(text.Font) && !fonts.Contains(text.Font))
@@ -431,30 +431,30 @@ namespace InfoPanel.Designer
                     Commit(session, text, nameof(text.Font), v => text.Font = v, text.Font, font);
                 }
             };
-            _root.Children.Add(Field("Font", fontPicker));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Font"), fontPicker));
 
             var sizeColorRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
             sizeColorRow.Children.Add(IntEditor(text.FontSize, v => Commit(session, text, nameof(text.FontSize), s => text.FontSize = s, text.FontSize, v), 1, 500));
             sizeColorRow.Children.Add(ColorEditor(session, text, nameof(text.Color), text.Color, v => text.Color = v));
-            _root.Children.Add(Field("Size / color", sizeColorRow));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Size / color"), sizeColorRow));
 
             var styleRow = new WrapPanel();
-            styleRow.Children.Add(Check("Bold", text.Bold, v => Commit(session, text, nameof(text.Bold), x => text.Bold = x, text.Bold, v)));
-            styleRow.Children.Add(Check("Italic", text.Italic, v => Commit(session, text, nameof(text.Italic), x => text.Italic = x, text.Italic, v)));
-            styleRow.Children.Add(Check("Underline", text.Underline, v => Commit(session, text, nameof(text.Underline), x => text.Underline = x, text.Underline, v)));
-            styleRow.Children.Add(Check("Strikeout", text.Strikeout, v => Commit(session, text, nameof(text.Strikeout), x => text.Strikeout = x, text.Strikeout, v)));
+            styleRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Bold"), text.Bold, v => Commit(session, text, nameof(text.Bold), x => text.Bold = x, text.Bold, v)));
+            styleRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Italic"), text.Italic, v => Commit(session, text, nameof(text.Italic), x => text.Italic = x, text.Italic, v)));
+            styleRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Underline"), text.Underline, v => Commit(session, text, nameof(text.Underline), x => text.Underline = x, text.Underline, v)));
+            styleRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Strikeout"), text.Strikeout, v => Commit(session, text, nameof(text.Strikeout), x => text.Strikeout = x, text.Strikeout, v)));
             _root.Children.Add(styleRow);
 
             var alignRow = new WrapPanel();
-            alignRow.Children.Add(Check("Right align", text.RightAlign, v => Commit(session, text, nameof(text.RightAlign), x => text.RightAlign = x, text.RightAlign, v)));
-            alignRow.Children.Add(Check("Center", text.CenterAlign, v => Commit(session, text, nameof(text.CenterAlign), x => text.CenterAlign = x, text.CenterAlign, v)));
-            alignRow.Children.Add(Check("Uppercase", text.Uppercase, v => Commit(session, text, nameof(text.Uppercase), x => text.Uppercase = x, text.Uppercase, v)));
+            alignRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Right align"), text.RightAlign, v => Commit(session, text, nameof(text.RightAlign), x => text.RightAlign = x, text.RightAlign, v)));
+            alignRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Center"), text.CenterAlign, v => Commit(session, text, nameof(text.CenterAlign), x => text.CenterAlign = x, text.CenterAlign, v)));
+            alignRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Uppercase"), text.Uppercase, v => Commit(session, text, nameof(text.Uppercase), x => text.Uppercase = x, text.Uppercase, v)));
             _root.Children.Add(alignRow);
 
             var flowRow = new WrapPanel();
-            flowRow.Children.Add(Check("Wrap", text.Wrap, v => Commit(session, text, nameof(text.Wrap), x => text.Wrap = x, text.Wrap, v)));
-            flowRow.Children.Add(Check("Ellipsis", text.Ellipsis, v => Commit(session, text, nameof(text.Ellipsis), x => text.Ellipsis = x, text.Ellipsis, v)));
-            flowRow.Children.Add(Check("Marquee", text.Marquee, v =>
+            flowRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Wrap"), text.Wrap, v => Commit(session, text, nameof(text.Wrap), x => text.Wrap = x, text.Wrap, v)));
+            flowRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Ellipsis"), text.Ellipsis, v => Commit(session, text, nameof(text.Ellipsis), x => text.Ellipsis = x, text.Ellipsis, v)));
+            flowRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Marquee"), text.Marquee, v =>
             {
                 Commit(session, text, nameof(text.Marquee), x => text.Marquee = x, text.Marquee, v);
                 Rebuild();
@@ -464,13 +464,13 @@ namespace InfoPanel.Designer
             if (text.Marquee)
             {
                 var marqueeGrid = TwoColumns();
-                AddCell(marqueeGrid, 0, 0, Field("Speed", IntEditor(text.MarqueeSpeed, v => Commit(session, text, nameof(text.MarqueeSpeed), x => text.MarqueeSpeed = x, text.MarqueeSpeed, v), 1, 200)));
-                AddCell(marqueeGrid, 0, 1, Field("Spacing", IntEditor(text.MarqueeSpacing, v => Commit(session, text, nameof(text.MarqueeSpacing), x => text.MarqueeSpacing = x, text.MarqueeSpacing, v), 0, 500)));
+                AddCell(marqueeGrid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Speed"), IntEditor(text.MarqueeSpeed, v => Commit(session, text, nameof(text.MarqueeSpeed), x => text.MarqueeSpeed = x, text.MarqueeSpeed, v), 1, 200)));
+                AddCell(marqueeGrid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Spacing"), IntEditor(text.MarqueeSpacing, v => Commit(session, text, nameof(text.MarqueeSpacing), x => text.MarqueeSpacing = x, text.MarqueeSpacing, v), 0, 500)));
                 _root.Children.Add(marqueeGrid);
             }
 
             var glowRow = new WrapPanel();
-            glowRow.Children.Add(Check("Glow", text.GlowEnabled, v =>
+            glowRow.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Glow"), text.GlowEnabled, v =>
             {
                 Commit(session, text, nameof(text.GlowEnabled), x => text.GlowEnabled = x, text.GlowEnabled, v);
                 Rebuild();
@@ -492,7 +492,7 @@ namespace InfoPanel.Designer
                     }
                 };
                 glowDetail.Children.Add(blendPicker);
-                _root.Children.Add(Field("Radius / color / blend", glowDetail));
+                _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Radius / color / blend"), glowDetail));
             }
         }
 
@@ -505,11 +505,11 @@ namespace InfoPanel.Designer
             {
                 try
                 {
-                    preview.Text = "Preview: " + DateTime.Now.ToString(getFormat());
+                    preview.Text = InfoPanel.Localization.Localizer.Text("Preview: ") + DateTime.Now.ToString(getFormat());
                 }
                 catch (FormatException)
                 {
-                    preview.Text = "(invalid format)";
+                    preview.Text = InfoPanel.Localization.Localizer.Text("(invalid format)");
                 }
             }
 
@@ -525,14 +525,14 @@ namespace InfoPanel.Designer
                     UpdatePreview();
                 }
             };
-            _root.Children.Add(Field("Format", formatBox));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Format"), formatBox));
             _root.Children.Add(preview);
             UpdatePreview();
 
             string[] templates = includeTimeTokens
                 ? ["hh:mm:ss tt", "HH:mm:ss", "hh:mm tt", "HH:mm", "dd MMM yyyy HH:mm"]
                 : ["dd/MM/yyyy", "MM/dd/yyyy", "yyyy-MM-dd", "dddd, MMMM dd", "ddd, MMM dd yyyy", "MMMM dd, yyyy"];
-            var templateCombo = new ComboBox { ItemsSource = templates, PlaceholderText = "Templates…" };
+            var templateCombo = new ComboBox { ItemsSource = templates, PlaceholderText = InfoPanel.Localization.Localizer.Text("Templates…") };
             templateCombo.SelectionChanged += (_, _) =>
             {
                 if (!_rebuilding && templateCombo.SelectedItem is string template)
@@ -540,7 +540,7 @@ namespace InfoPanel.Designer
                     formatBox.Text = template;
                 }
             };
-            _root.Children.Add(Field("Template", templateCombo));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Template"), templateCombo));
 
             void AddTokenExpander(string title, string[] tokens)
             {
@@ -569,80 +569,80 @@ namespace InfoPanel.Designer
 
         private void BuildTableSection(DesignerSession session, TableSensorDisplayItem table)
         {
-            _root.Children.Add(Header("Table"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Table")));
             _root.Children.Add(Label($"Sensor: {table.SensorName}"));
             BuildBindButton(table);
 
-            var formatBox = new TextBox { Text = table.TableFormat, Watermark = "e.g. 0:Name|1:Value" };
+            var formatBox = new TextBox { Text = table.TableFormat, Watermark = InfoPanel.Localization.Localizer.Text("e.g. 0:Name|1:Value") };
             formatBox.LostFocus += (_, _) => Commit(session, table, nameof(table.TableFormat), v => table.TableFormat = v, table.TableFormat, formatBox.Text ?? "");
-            _root.Children.Add(Field("Format", formatBox));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Format"), formatBox));
 
-            _root.Children.Add(Field("Max rows", IntEditor(table.MaxRows, v => Commit(session, table, nameof(table.MaxRows), x => table.MaxRows = x, table.MaxRows, v), 1, 100)));
-            _root.Children.Add(Check("Show header", table.ShowHeader, v => Commit(session, table, nameof(table.ShowHeader), x => table.ShowHeader = x, table.ShowHeader, v)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Max rows"), IntEditor(table.MaxRows, v => Commit(session, table, nameof(table.MaxRows), x => table.MaxRows = x, table.MaxRows, v), 1, 100)));
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show header"), table.ShowHeader, v => Commit(session, table, nameof(table.ShowHeader), x => table.ShowHeader = x, table.ShowHeader, v)));
         }
 
         private void BuildBarSection(DesignerSession session, BarDisplayItem bar)
         {
-            _root.Children.Add(Header("Bar"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Bar")));
             BuildSensorBindingHeader(session, bar);
 
-            _root.Children.Add(Field("Corner radius", IntEditor(bar.CornerRadius, v => Commit(session, bar, nameof(bar.CornerRadius), x => bar.CornerRadius = x, bar.CornerRadius, v), 0)));
-            _root.Children.Add(Field("Bar color", ColorEditor(session, bar, nameof(bar.Color), bar.Color, v => bar.Color = v)));
-            _root.Children.Add(Check("Flip horizontally", bar.FlipX, v => Commit(session, bar, nameof(bar.FlipX), x => bar.FlipX = x, bar.FlipX, v)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Corner radius"), IntEditor(bar.CornerRadius, v => Commit(session, bar, nameof(bar.CornerRadius), x => bar.CornerRadius = x, bar.CornerRadius, v), 0)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Bar color"), ColorEditor(session, bar, nameof(bar.Color), bar.Color, v => bar.Color = v)));
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Flip horizontally"), bar.FlipX, v => Commit(session, bar, nameof(bar.FlipX), x => bar.FlipX = x, bar.FlipX, v)));
 
-            _root.Children.Add(CheckWithColor(session, bar, "Show frame", bar.Frame, v => Commit(session, bar, nameof(bar.Frame), x => bar.Frame = x, bar.Frame, v),
+            _root.Children.Add(CheckWithColor(session, bar, InfoPanel.Localization.Localizer.Text("Show frame"), bar.Frame, v => Commit(session, bar, nameof(bar.Frame), x => bar.Frame = x, bar.Frame, v),
                 nameof(bar.FrameColor), bar.FrameColor, v => bar.FrameColor = v));
-            _root.Children.Add(CheckWithColor(session, bar, "Show background", bar.Background, v => Commit(session, bar, nameof(bar.Background), x => bar.Background = x, bar.Background, v),
+            _root.Children.Add(CheckWithColor(session, bar, InfoPanel.Localization.Localizer.Text("Show background"), bar.Background, v => Commit(session, bar, nameof(bar.Background), x => bar.Background = x, bar.Background, v),
                 nameof(bar.BackgroundColor), bar.BackgroundColor, v => bar.BackgroundColor = v));
-            _root.Children.Add(CheckWithColor(session, bar, "Gradient", bar.Gradient, v => Commit(session, bar, nameof(bar.Gradient), x => bar.Gradient = x, bar.Gradient, v),
+            _root.Children.Add(CheckWithColor(session, bar, InfoPanel.Localization.Localizer.Text("Gradient"), bar.Gradient, v => Commit(session, bar, nameof(bar.Gradient), x => bar.Gradient = x, bar.Gradient, v),
                 nameof(bar.GradientColor), bar.GradientColor, v => bar.GradientColor = v));
         }
 
         private void BuildGraphSection(DesignerSession session, GraphDisplayItem graph)
         {
-            _root.Children.Add(Header("Graph"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Graph")));
             BuildSensorBindingHeader(session, graph);
 
-            _root.Children.Add(Field("Type", EnumCombo(graph.Type, v => Commit(session, graph, nameof(graph.Type), x => graph.Type = x, graph.Type, v))));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Type"), EnumCombo(graph.Type, v => Commit(session, graph, nameof(graph.Type), x => graph.Type = x, graph.Type, v))));
 
             var grid = TwoColumns();
-            AddCell(grid, 0, 0, Field("Thickness", IntEditor(graph.Thickness, v => Commit(session, graph, nameof(graph.Thickness), x => graph.Thickness = x, graph.Thickness, v), 1)));
-            AddCell(grid, 0, 1, Field("Step", IntEditor(graph.Step, v => Commit(session, graph, nameof(graph.Step), x => graph.Step = x, graph.Step, v), 1)));
+            AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Thickness"), IntEditor(graph.Thickness, v => Commit(session, graph, nameof(graph.Thickness), x => graph.Thickness = x, graph.Thickness, v), 1)));
+            AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Step"), IntEditor(graph.Step, v => Commit(session, graph, nameof(graph.Step), x => graph.Step = x, graph.Step, v), 1)));
             _root.Children.Add(grid);
 
-            _root.Children.Add(Field("Graph color", ColorEditor(session, graph, nameof(graph.Color), graph.Color, v => graph.Color = v)));
-            _root.Children.Add(Check("Flip horizontally", graph.FlipX, v => Commit(session, graph, nameof(graph.FlipX), x => graph.FlipX = x, graph.FlipX, v)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Graph color"), ColorEditor(session, graph, nameof(graph.Color), graph.Color, v => graph.Color = v)));
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Flip horizontally"), graph.FlipX, v => Commit(session, graph, nameof(graph.FlipX), x => graph.FlipX = x, graph.FlipX, v)));
 
-            _root.Children.Add(CheckWithColor(session, graph, "Fill", graph.Fill, v => Commit(session, graph, nameof(graph.Fill), x => graph.Fill = x, graph.Fill, v),
+            _root.Children.Add(CheckWithColor(session, graph, InfoPanel.Localization.Localizer.Text("Fill"), graph.Fill, v => Commit(session, graph, nameof(graph.Fill), x => graph.Fill = x, graph.Fill, v),
                 nameof(graph.FillColor), graph.FillColor, v => graph.FillColor = v));
-            _root.Children.Add(CheckWithColor(session, graph, "Show frame", graph.Frame, v => Commit(session, graph, nameof(graph.Frame), x => graph.Frame = x, graph.Frame, v),
+            _root.Children.Add(CheckWithColor(session, graph, InfoPanel.Localization.Localizer.Text("Show frame"), graph.Frame, v => Commit(session, graph, nameof(graph.Frame), x => graph.Frame = x, graph.Frame, v),
                 nameof(graph.FrameColor), graph.FrameColor, v => graph.FrameColor = v));
-            _root.Children.Add(CheckWithColor(session, graph, "Show background", graph.Background, v => Commit(session, graph, nameof(graph.Background), x => graph.Background = x, graph.Background, v),
+            _root.Children.Add(CheckWithColor(session, graph, InfoPanel.Localization.Localizer.Text("Show background"), graph.Background, v => Commit(session, graph, nameof(graph.Background), x => graph.Background = x, graph.Background, v),
                 nameof(graph.BackgroundColor), graph.BackgroundColor, v => graph.BackgroundColor = v));
         }
 
         private void BuildDonutSection(DesignerSession session, DonutDisplayItem donut)
         {
-            _root.Children.Add(Header("Donut"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Donut")));
             BuildSensorBindingHeader(session, donut);
 
             var grid = TwoColumns();
-            AddCell(grid, 0, 0, Field("Radius", IntEditor(donut.Radius, v => Commit(session, donut, nameof(donut.Radius), x => donut.Radius = x, donut.Radius, v), 5)));
-            AddCell(grid, 0, 1, Field("Thickness", IntEditor(donut.Thickness, v => Commit(session, donut, nameof(donut.Thickness), x => donut.Thickness = x, donut.Thickness, v), 1)));
+            AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Radius"), IntEditor(donut.Radius, v => Commit(session, donut, nameof(donut.Radius), x => donut.Radius = x, donut.Radius, v), 5)));
+            AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Thickness"), IntEditor(donut.Thickness, v => Commit(session, donut, nameof(donut.Thickness), x => donut.Thickness = x, donut.Thickness, v), 1)));
             _root.Children.Add(grid);
 
-            _root.Children.Add(Field("Span (°)", SliderEditor(1, 360, donut.Span, v => Commit(session, donut, nameof(donut.Span), x => donut.Span = x, donut.Span, v))));
-            _root.Children.Add(Field("Donut color", ColorEditor(session, donut, nameof(donut.Color), donut.Color, v => donut.Color = v)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Span (°)"), SliderEditor(1, 360, donut.Span, v => Commit(session, donut, nameof(donut.Span), x => donut.Span = x, donut.Span, v))));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Donut color"), ColorEditor(session, donut, nameof(donut.Color), donut.Color, v => donut.Color = v)));
 
-            _root.Children.Add(CheckWithColor(session, donut, "Show frame", donut.Frame, v => Commit(session, donut, nameof(donut.Frame), x => donut.Frame = x, donut.Frame, v),
+            _root.Children.Add(CheckWithColor(session, donut, InfoPanel.Localization.Localizer.Text("Show frame"), donut.Frame, v => Commit(session, donut, nameof(donut.Frame), x => donut.Frame = x, donut.Frame, v),
                 nameof(donut.FrameColor), donut.FrameColor, v => donut.FrameColor = v));
-            _root.Children.Add(CheckWithColor(session, donut, "Show background", donut.Background, v => Commit(session, donut, nameof(donut.Background), x => donut.Background = x, donut.Background, v),
+            _root.Children.Add(CheckWithColor(session, donut, InfoPanel.Localization.Localizer.Text("Show background"), donut.Background, v => Commit(session, donut, nameof(donut.Background), x => donut.Background = x, donut.Background, v),
                 nameof(donut.BackgroundColor), donut.BackgroundColor, v => donut.BackgroundColor = v));
         }
 
         private void BuildChartRangeSection(DesignerSession session, ChartDisplayItem chart)
         {
-            _root.Children.Add(Check("Auto range", chart.AutoValue, v =>
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Auto range"), chart.AutoValue, v =>
             {
                 Commit(session, chart, nameof(chart.AutoValue), x => chart.AutoValue = x, chart.AutoValue, v);
                 Rebuild();
@@ -651,29 +651,29 @@ namespace InfoPanel.Designer
             if (!chart.AutoValue)
             {
                 var grid = TwoColumns();
-                AddCell(grid, 0, 0, Field("Min", IntEditor(chart.MinValue, v => Commit(session, chart, nameof(chart.MinValue), x => chart.MinValue = x, chart.MinValue, v))));
-                AddCell(grid, 0, 1, Field("Max", IntEditor(chart.MaxValue, v => Commit(session, chart, nameof(chart.MaxValue), x => chart.MaxValue = x, chart.MaxValue, v))));
+                AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Min"), IntEditor(chart.MinValue, v => Commit(session, chart, nameof(chart.MinValue), x => chart.MinValue = x, chart.MinValue, v))));
+                AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Max"), IntEditor(chart.MaxValue, v => Commit(session, chart, nameof(chart.MaxValue), x => chart.MaxValue = x, chart.MaxValue, v))));
                 _root.Children.Add(grid);
             }
         }
 
         private void BuildGaugeSection(DesignerSession session, GaugeDisplayItem gauge)
         {
-            _root.Children.Add(Header("Gauge"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Gauge")));
             BuildSensorHeaderLine(gauge, gauge.SensorName);
             BuildBindButton(gauge);
 
             var grid = TwoColumns();
-            AddCell(grid, 0, 0, Field("Min value", DoubleEditor(gauge.MinValue, v => Commit(session, gauge, nameof(gauge.MinValue), x => gauge.MinValue = x, gauge.MinValue, v), 1m, "0.0")));
-            AddCell(grid, 0, 1, Field("Max value", DoubleEditor(gauge.MaxValue, v => Commit(session, gauge, nameof(gauge.MaxValue), x => gauge.MaxValue = x, gauge.MaxValue, v), 1m, "0.0")));
+            AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Min value"), DoubleEditor(gauge.MinValue, v => Commit(session, gauge, nameof(gauge.MinValue), x => gauge.MinValue = x, gauge.MinValue, v), 1m, "0.0")));
+            AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Max value"), DoubleEditor(gauge.MaxValue, v => Commit(session, gauge, nameof(gauge.MaxValue), x => gauge.MaxValue = x, gauge.MaxValue, v), 1m, "0.0")));
             _root.Children.Add(grid);
 
-            _root.Children.Add(Field("Scale %", SliderEditor(1, 500, gauge.Scale, v => Commit(session, gauge, nameof(gauge.Scale), x => gauge.Scale = x, gauge.Scale, v))));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Scale %"), SliderEditor(1, 500, gauge.Scale, v => Commit(session, gauge, nameof(gauge.Scale), x => gauge.Scale = x, gauge.Scale, v))));
 
-            _root.Children.Add(Check("Mirror (flip horizontally)", gauge.FlipX, v => Commit(session, gauge, nameof(gauge.FlipX), x => gauge.FlipX = x, gauge.FlipX, v)));
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Mirror (flip horizontally)"), gauge.FlipX, v => Commit(session, gauge, nameof(gauge.FlipX), x => gauge.FlipX = x, gauge.FlipX, v)));
 
-            _root.Children.Add(Header("Image steps"));
-            _root.Children.Add(Label("Frames from min to max; the shown frame follows the sensor value."));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Image steps")));
+            _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Frames from min to max; the shown frame follows the sensor value.")));
 
             // Live preview of the frame the render loop is currently animating.
             var previewImage = new Image { Height = 130, Stretch = Stretch.Uniform };
@@ -682,7 +682,7 @@ namespace InfoPanel.Designer
                 FontSize = 12,
                 Opacity = 0.7,
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Text = "No frames",
+                Text = InfoPanel.Localization.Localizer.Text("No frames"),
             };
             var previewStack = new StackPanel { Spacing = 6 };
             previewStack.Children.Add(previewImage);
@@ -708,7 +708,7 @@ namespace InfoPanel.Designer
 
                 if (current == null || gauge.Images.Count == 0)
                 {
-                    previewCaption.Text = "No frames";
+                    previewCaption.Text = InfoPanel.Localization.Localizer.Text("No frames");
                     return;
                 }
 
@@ -790,7 +790,7 @@ namespace InfoPanel.Designer
 
             var buttons = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
 
-            var add = new Button { Content = "Add…" };
+            var add = new Button { Content = InfoPanel.Localization.Localizer.Text("Add…") };
             add.Click += async (_, _) =>
             {
                 var storage = TopLevel.GetTopLevel(this)?.StorageProvider;
@@ -829,7 +829,7 @@ namespace InfoPanel.Designer
             };
             buttons.Children.Add(add);
 
-            var remove = new Button { Content = "Remove" };
+            var remove = new Button { Content = InfoPanel.Localization.Localizer.Text("Remove") };
             remove.Click += (_, _) =>
             {
                 if (imageList.SelectedIndex >= 0 && imageList.SelectedIndex < gauge.Images.Count)
@@ -924,12 +924,12 @@ namespace InfoPanel.Designer
 
         private void BuildShapeSection(DesignerSession session, ShapeDisplayItem shape)
         {
-            _root.Children.Add(Header("Shape"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Shape")));
 
-            _root.Children.Add(Field("Type", EnumCombo(shape.Type, v => Commit(session, shape, nameof(shape.Type), x => shape.Type = x, shape.Type, v))));
-            _root.Children.Add(Field("Corner radius", IntEditor(shape.CornerRadius, v => Commit(session, shape, nameof(shape.CornerRadius), x => shape.CornerRadius = x, shape.CornerRadius, v), 0)));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Type"), EnumCombo(shape.Type, v => Commit(session, shape, nameof(shape.Type), x => shape.Type = x, shape.Type, v))));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Corner radius"), IntEditor(shape.CornerRadius, v => Commit(session, shape, nameof(shape.CornerRadius), x => shape.CornerRadius = x, shape.CornerRadius, v), 0)));
 
-            _root.Children.Add(Check("Show frame", shape.ShowFrame, v =>
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show frame"), shape.ShowFrame, v =>
             {
                 Commit(session, shape, nameof(shape.ShowFrame), x => shape.ShowFrame = x, shape.ShowFrame, v);
                 Rebuild();
@@ -939,37 +939,37 @@ namespace InfoPanel.Designer
                 var frameRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
                 frameRow.Children.Add(IntEditor(shape.FrameThickness, v => Commit(session, shape, nameof(shape.FrameThickness), x => shape.FrameThickness = x, shape.FrameThickness, v), 1));
                 frameRow.Children.Add(ColorEditor(session, shape, nameof(shape.FrameColor), shape.FrameColor, v => shape.FrameColor = v));
-                _root.Children.Add(Field("Thickness / color", frameRow));
+                _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Thickness / color"), frameRow));
             }
 
-            _root.Children.Add(CheckWithColor(session, shape, "Show fill", shape.ShowFill, v => Commit(session, shape, nameof(shape.ShowFill), x => shape.ShowFill = x, shape.ShowFill, v),
+            _root.Children.Add(CheckWithColor(session, shape, InfoPanel.Localization.Localizer.Text("Show fill"), shape.ShowFill, v => Commit(session, shape, nameof(shape.ShowFill), x => shape.ShowFill = x, shape.ShowFill, v),
                 nameof(shape.FillColor), shape.FillColor, v => shape.FillColor = v));
 
-            _root.Children.Add(Check("Show gradient", shape.ShowGradient, v =>
+            _root.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show gradient"), shape.ShowGradient, v =>
             {
                 Commit(session, shape, nameof(shape.ShowGradient), x => shape.ShowGradient = x, shape.ShowGradient, v);
                 Rebuild();
             }));
             if (shape.ShowGradient)
             {
-                _root.Children.Add(Field("Gradient type", EnumCombo(shape.GradientType, v => Commit(session, shape, nameof(shape.GradientType), x => shape.GradientType = x, shape.GradientType, v))));
+                _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Gradient type"), EnumCombo(shape.GradientType, v => Commit(session, shape, nameof(shape.GradientType), x => shape.GradientType = x, shape.GradientType, v))));
                 var grid = TwoColumns();
-                AddCell(grid, 0, 0, Field("Angle", IntEditor(shape.GradientAngle, v => Commit(session, shape, nameof(shape.GradientAngle), x => shape.GradientAngle = x, shape.GradientAngle, v), 0, 359)));
-                AddCell(grid, 0, 1, Field("Speed (ms)", IntEditor(shape.GradientAnimationSpeed, v => Commit(session, shape, nameof(shape.GradientAnimationSpeed), x => shape.GradientAnimationSpeed = x, shape.GradientAnimationSpeed, v), 0)));
+                AddCell(grid, 0, 0, Field(InfoPanel.Localization.Localizer.Text("Angle"), IntEditor(shape.GradientAngle, v => Commit(session, shape, nameof(shape.GradientAngle), x => shape.GradientAngle = x, shape.GradientAngle, v), 0, 359)));
+                AddCell(grid, 0, 1, Field(InfoPanel.Localization.Localizer.Text("Speed (ms)"), IntEditor(shape.GradientAnimationSpeed, v => Commit(session, shape, nameof(shape.GradientAnimationSpeed), x => shape.GradientAnimationSpeed = x, shape.GradientAnimationSpeed, v), 0)));
                 _root.Children.Add(grid);
 
                 var colorRow = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 8 };
                 colorRow.Children.Add(ColorEditor(session, shape, nameof(shape.GradientColor), shape.GradientColor, v => shape.GradientColor = v));
                 colorRow.Children.Add(ColorEditor(session, shape, nameof(shape.GradientColor2), shape.GradientColor2, v => shape.GradientColor2 = v));
-                _root.Children.Add(Field("Colors", colorRow));
+                _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Colors"), colorRow));
             }
         }
 
         private void BuildImageSection(DesignerSession session, ImageDisplayItem image)
         {
-            _root.Children.Add(Header("Image / Video"));
+            _root.Children.Add(Header(InfoPanel.Localization.Localizer.Text("Image / Video")));
 
-            _root.Children.Add(Field("Source type", EnumCombo(image.Type, v =>
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Source type"), EnumCombo(image.Type, v =>
             {
                 Commit(session, image, nameof(image.Type), x => image.Type = x, image.Type, v);
                 Rebuild();
@@ -980,7 +980,7 @@ namespace InfoPanel.Designer
                 case ImageDisplayItem.ImageType.FILE:
                 {
                     _root.Children.Add(Label(image.CalculatedPath ?? "No file selected"));
-                    var pick = new Button { Content = "Choose file…" };
+                    var pick = new Button { Content = InfoPanel.Localization.Localizer.Text("Choose file…") };
                     pick.Click += async (_, _) => await PickImageFile(session, image);
                     _root.Children.Add(pick);
                     break;
@@ -988,7 +988,7 @@ namespace InfoPanel.Designer
 
                 case ImageDisplayItem.ImageType.URL:
                 {
-                    var url = new TextBox { Text = image.HttpUrl, Watermark = "http(s):// image URL" };
+                    var url = new TextBox { Text = image.HttpUrl, Watermark = InfoPanel.Localization.Localizer.Text("http(s):// image URL") };
                     url.LostFocus += (_, _) =>
                     {
                         var value = url.Text ?? "";
@@ -997,13 +997,13 @@ namespace InfoPanel.Designer
                             Commit(session, image, nameof(image.HttpUrl), v => image.HttpUrl = v, image.HttpUrl ?? "", value);
                         }
                     };
-                    _root.Children.Add(Field("URL", url));
+                    _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("URL"), url));
                     break;
                 }
 
                 case ImageDisplayItem.ImageType.RTSP:
                 {
-                    var rtsp = new TextBox { Text = image.RtspUrl, Watermark = "rtsp:// stream URL" };
+                    var rtsp = new TextBox { Text = image.RtspUrl, Watermark = InfoPanel.Localization.Localizer.Text("rtsp:// stream URL") };
                     rtsp.LostFocus += (_, _) =>
                     {
                         var value = rtsp.Text ?? "";
@@ -1012,27 +1012,27 @@ namespace InfoPanel.Designer
                             Commit(session, image, nameof(image.RtspUrl), v => image.RtspUrl = v, image.RtspUrl ?? "", value);
                         }
                     };
-                    _root.Children.Add(Field("RTSP URL", rtsp));
+                    _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("RTSP URL"), rtsp));
                     break;
                 }
             }
 
             if (image.Type == ImageDisplayItem.ImageType.URL || image is HttpImageDisplayItem)
             {
-                _root.Children.Add(Field("Refresh every (s), 0 = never",
+                _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Refresh every (s), 0 = never"),
                     IntEditor(image.RefreshIntervalSeconds, v => Commit(session, image, nameof(image.RefreshIntervalSeconds),
                         x => image.RefreshIntervalSeconds = x, image.RefreshIntervalSeconds, v))));
-                _root.Children.Add(Label("Re-downloads the image periodically for webcams, rendered dashboards and other changing sources."));
+                _root.Children.Add(Label(InfoPanel.Localization.Localizer.Text("Re-downloads the image periodically for webcams, rendered dashboards and other changing sources.")));
             }
 
-            _root.Children.Add(Field("Scale %", SliderEditor(1, 500, image.Scale, v => Commit(session, image, nameof(image.Scale), x => image.Scale = x, image.Scale, v))));
+            _root.Children.Add(Field(InfoPanel.Localization.Localizer.Text("Scale %"), SliderEditor(1, 500, image.Scale, v => Commit(session, image, nameof(image.Scale), x => image.Scale = x, image.Scale, v))));
 
-            _root.Children.Add(CheckWithColor(session, image, "Fill layer", image.Layer, v => Commit(session, image, nameof(image.Layer), x => image.Layer = x, image.Layer, v),
+            _root.Children.Add(CheckWithColor(session, image, InfoPanel.Localization.Localizer.Text("Fill layer"), image.Layer, v => Commit(session, image, nameof(image.Layer), x => image.Layer = x, image.Layer, v),
                 nameof(image.LayerColor), image.LayerColor, v => image.LayerColor = v));
 
             var flags = new WrapPanel();
-            flags.Children.Add(Check("Enable caching", image.Cache, v => Commit(session, image, nameof(image.Cache), x => image.Cache = x, image.Cache, v)));
-            flags.Children.Add(Check("Show panel", image.ShowPanel, v => Commit(session, image, nameof(image.ShowPanel), x => image.ShowPanel = x, image.ShowPanel, v)));
+            flags.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Enable caching"), image.Cache, v => Commit(session, image, nameof(image.Cache), x => image.Cache = x, image.Cache, v)));
+            flags.Children.Add(Check(InfoPanel.Localization.Localizer.Text("Show panel"), image.ShowPanel, v => Commit(session, image, nameof(image.ShowPanel), x => image.ShowPanel = x, image.ShowPanel, v)));
             _root.Children.Add(flags);
         }
 

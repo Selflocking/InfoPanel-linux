@@ -8,6 +8,9 @@ two-way compatibility for profiles, settings and plugins.
 
 New here? Start with the [User Guide](docs/USER-GUIDE.md).
 
+Choose English or 简体中文 in **Settings → Language** (restart to apply throughout).
+See [localization and translation guide](docs/LOCALIZATION.md).
+
 ## Contents
 
 - [Features](#features)
@@ -320,8 +323,11 @@ CDC serial JPEG protocol at 2 Mbaud (VID `33C3`):
 
 | Model | Resolution | USB ID |
 |---|---|---|
+| Valkyrie VK03 / VN03M case screen (MCVKC03) ✓ | 360×960 (960×360 landscape) | `345F:9132` |
 | Valkyrie V360 LCD ✓ | 320×240 | `345F:9132` |
 | Valkyrie MC360 LCD (experimental) | 640×480 | `374A:A021`, `Vk-Copl-08` |
+
+VK03 / VN03M setup and continuous-refresh requirements: [docs/VALKYRIE-VK03.md](docs/VALKYRIE-VK03.md).
 
 Protocol details and test status are in [docs/VALKYRIE-V360.md](docs/VALKYRIE-V360.md)
 and [docs/VALKYRIE-MC360.md](docs/VALKYRIE-MC360.md). Only identified retail

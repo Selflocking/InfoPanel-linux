@@ -8,8 +8,9 @@ namespace InfoPanel.VmaxPanel
         public int Height { get; init; }
         public int VendorId { get; init; }
         public int ProductId { get; init; }
+        public bool UsesBgr888 { get; init; }
         public bool UsesBgr565 { get; init; }
         public bool Experimental { get; init; }
-        public bool IsValkyrie => Model == VmaxPanelModel.ValkyrieV360 || Model == VmaxPanelModel.ValkyrieMc360;
+        public bool IsValkyrie => Model == VmaxPanelModel.ValkyrieV360 || Model == VmaxPanelModel.ValkyrieMc360 || Model == VmaxPanelModel.ValkyrieVk03;
     }
 }

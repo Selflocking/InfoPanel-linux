@@ -1,4 +1,5 @@
 <Application xmlns="https://github.com/avaloniaui"
+             xmlns:loc="using:InfoPanel.Localization"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:sty="using:FluentAvalonia.Styling"
              x:Class="InfoPanel.App"
@@ -13,15 +14,15 @@
             <TrayIcon Icon="avares://infopanel/Assets/favicon.ico" ToolTipText="InfoPanel Linux" Clicked="TrayIcon_Clicked">
                 <TrayIcon.Menu>
                     <NativeMenu>
-                        <NativeMenuItem Header="Open InfoPanel" Click="TrayMenu_Open" />
+                        <NativeMenuItem Header="{loc:Tr Sb24e10694471}" Click="TrayMenu_Open" />
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="Dashboard" Click="TrayMenu_Dashboard" />
-                        <NativeMenuItem Header="Designer" Click="TrayMenu_Designer" />
-                        <NativeMenuItem Header="Devices" Click="TrayMenu_Devices" />
-                        <NativeMenuItem Header="Sensors" Click="TrayMenu_Sensors" />
-                        <NativeMenuItem Header="Settings" Click="TrayMenu_Settings" />
+                        <NativeMenuItem Header="{loc:Tr S67b696468610}" Click="TrayMenu_Dashboard" />
+                        <NativeMenuItem Header="{loc:Tr S8b6d8e40753a}" Click="TrayMenu_Designer" />
+                        <NativeMenuItem Header="{loc:Tr S4ba5121d4d1b}" Click="TrayMenu_Devices" />
+                        <NativeMenuItem Header="{loc:Tr S76140e34f635}" Click="TrayMenu_Sensors" />
+                        <NativeMenuItem Header="{loc:Tr S74a883a037bc}" Click="TrayMenu_Settings" />
                         <NativeMenuItemSeparator />
-                        <NativeMenuItem Header="Exit" Click="TrayMenu_Exit" />
+                        <NativeMenuItem Header="{loc:Tr Sd17d84a60499}" Click="TrayMenu_Exit" />
                     </NativeMenu>
                 </TrayIcon.Menu>
             </TrayIcon>

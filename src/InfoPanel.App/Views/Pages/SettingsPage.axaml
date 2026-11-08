@@ -1,70 +1,81 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:loc="using:InfoPanel.Localization"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="InfoPanel.Views.Pages.SettingsPage">
 
     <ScrollViewer>
         <StackPanel Margin="24" Spacing="20" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Settings" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="{loc:Tr S74a883a037bc}" FontSize="28" FontWeight="SemiBold" />
 
             <StackPanel Spacing="8">
-                <TextBlock Text="General" FontSize="18" FontWeight="SemiBold" />
-                <ToggleSwitch x:Name="AutoStartToggle" OnContent="Start at login" OffContent="Start at login" />
-                <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Start delay (s)" VerticalAlignment="Center" Margin="0,0,12,0" />
-                    <NumericUpDown x:Name="AutoStartDelay" Minimum="0" Maximum="120" Increment="1" FormatString="0" />
-                </DockPanel>
-                <ToggleSwitch x:Name="StartMinimizedToggle" OnContent="Start minimized" OffContent="Start minimized" />
-                <ToggleSwitch x:Name="MinimizeToTrayToggle" OnContent="Close button minimizes to tray" OffContent="Close button minimizes to tray" />
-                <ToggleSwitch x:Name="UpdateCheckToggle" OnContent="Check for updates at startup" OffContent="Check for updates at startup" />
+                <TextBlock Text="{loc:Tr Sa4fe65264ef7}" FontSize="18" FontWeight="SemiBold" />
+                <ComboBox x:Name="LanguagePicker" MinWidth="240">
+                    <ComboBoxItem Content="{loc:Tr Sb0459211f9f7}" Tag="" />
+                    <ComboBoxItem Content="English" Tag="en" />
+                    <ComboBoxItem Content="简体中文" Tag="zh-CN" />
+                </ComboBox>
+                <TextBlock Text="{loc:Tr S0da94f8b3e1d}" TextWrapping="Wrap" />
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Rendering" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="{loc:Tr Sc910d474dcd7}" FontSize="18" FontWeight="SemiBold" />
+                <ToggleSwitch x:Name="AutoStartToggle" OnContent="{loc:Tr S85010ecd9a16}" OffContent="{loc:Tr S85010ecd9a16}" />
                 <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Target frame rate" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr S5e471992ec42}" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <NumericUpDown x:Name="AutoStartDelay" Minimum="0" Maximum="120" Increment="1" FormatString="0" />
+                </DockPanel>
+                <ToggleSwitch x:Name="StartMinimizedToggle" OnContent="{loc:Tr Sd985517f74b1}" OffContent="{loc:Tr Sd985517f74b1}" />
+                <ToggleSwitch x:Name="MinimizeToTrayToggle" OnContent="{loc:Tr Seb1b01d579f0}" OffContent="{loc:Tr Seb1b01d579f0}" />
+                <ToggleSwitch x:Name="UpdateCheckToggle" OnContent="{loc:Tr S6d4834f783a8}" OffContent="{loc:Tr S6d4834f783a8}" />
+            </StackPanel>
+
+            <StackPanel Spacing="8">
+                <TextBlock Text="{loc:Tr Se2fe353986e6}" FontSize="18" FontWeight="SemiBold" />
+                <DockPanel MaxWidth="300" HorizontalAlignment="Left">
+                    <TextBlock Text="{loc:Tr S4f527efd1f7b}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <NumericUpDown x:Name="FrameRate" Minimum="1" Maximum="60" Increment="1" FormatString="0" />
                 </DockPanel>
                 <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Graph update (ms)" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr S731320839b58}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <NumericUpDown x:Name="GraphRate" Minimum="100" Maximum="10000" Increment="100" FormatString="0" />
                 </DockPanel>
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Program-specific profiles" FontSize="18" FontWeight="SemiBold" />
-                <TextBlock Text="Shows an overlay only while its trigger program is in the foreground. Set trigger programs per profile in the Designer."
+                <TextBlock Text="{loc:Tr Saf71019c502b}" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="{loc:Tr S45174973418f}"
                            FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                <ToggleSwitch x:Name="ProgramProfilesToggle" OnContent="Enabled" OffContent="Disabled" />
-                <ToggleSwitch x:Name="HideOthersToggle" OnContent="Hide other overlays while a trigger profile is shown" OffContent="Hide other overlays while a trigger profile is shown" />
+                <ToggleSwitch x:Name="ProgramProfilesToggle" OnContent="{loc:Tr S92c1cdfdf4cb}" OffContent="{loc:Tr S75081b593d15}" />
+                <ToggleSwitch x:Name="HideOthersToggle" OnContent="{loc:Tr Sd56633753fee}" OffContent="{loc:Tr Sd56633753fee}" />
                 <TextBlock x:Name="ProgramProfilesLimitation" FontSize="12" IsVisible="False"
                            Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Web server" FontSize="18" FontWeight="SemiBold" />
-                <TextBlock Text="Serves live profile images to browsers on your network."
+                <TextBlock Text="{loc:Tr S1643cf19b84e}" FontSize="18" FontWeight="SemiBold" />
+                <TextBlock Text="{loc:Tr Sba272864aede}"
                            FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                <ToggleSwitch x:Name="WebServerToggle" OnContent="Enabled" OffContent="Disabled" />
+                <ToggleSwitch x:Name="WebServerToggle" OnContent="{loc:Tr S92c1cdfdf4cb}" OffContent="{loc:Tr S75081b593d15}" />
                 <DockPanel MaxWidth="380" HorizontalAlignment="Left">
-                    <TextBlock Text="Listen address" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr Sedc8737a7436}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <TextBox x:Name="WebServerIp" PlaceholderText="127.0.0.1" />
                 </DockPanel>
                 <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Port" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr S72e9a59f5a1d}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <NumericUpDown x:Name="WebServerPort" Minimum="1" Maximum="65535" Increment="1" FormatString="0" />
                 </DockPanel>
                 <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Refresh rate (ms)" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr S9f803f14cdf2}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <NumericUpDown x:Name="WebRefreshRate" Minimum="16" Maximum="5000" Increment="16" FormatString="0" />
                 </DockPanel>
                 <TextBlock x:Name="WebServerLink" FontSize="12" Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
             </StackPanel>
 
             <StackPanel Spacing="8">
-                <TextBlock Text="Design grid" FontSize="18" FontWeight="SemiBold" />
-                <ToggleSwitch x:Name="GridLinesToggle" OnContent="Show grid lines in designer and overlays" OffContent="Show grid lines in designer and overlays" />
+                <TextBlock Text="{loc:Tr Sa50a4ad49919}" FontSize="18" FontWeight="SemiBold" />
+                <ToggleSwitch x:Name="GridLinesToggle" OnContent="{loc:Tr S29d0130c2883}" OffContent="{loc:Tr S29d0130c2883}" />
                 <DockPanel MaxWidth="300" HorizontalAlignment="Left">
-                    <TextBlock Text="Grid spacing" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="{loc:Tr Scce55fe5c0bc}" VerticalAlignment="Center" Margin="0,0,12,0" />
                     <NumericUpDown x:Name="GridSpacing" Minimum="5" Maximum="100" Increment="5" FormatString="0" />
                 </DockPanel>
             </StackPanel>

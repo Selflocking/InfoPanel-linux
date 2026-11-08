@@ -25,7 +25,7 @@ namespace InfoPanel.Views.Pages
         {
             if (Services.UpdateChecker.Available is { } update)
             {
-                UpdateStatusText.Text = "Update available.";
+                UpdateStatusText.Text = InfoPanel.Localization.Localizer.Text("Update available.");
                 UpdateTitleText.Text = $"{update.Title} is available (you have v{Services.UpdateChecker.CurrentVersion.ToString(3)})";
                 UpdateNotesText.Text = string.IsNullOrWhiteSpace(update.Notes)
                     ? "See the download page for details."
@@ -44,13 +44,13 @@ namespace InfoPanel.Views.Pages
         private async void CheckUpdates_Click(object? sender, RoutedEventArgs e)
         {
             CheckUpdatesButton.IsEnabled = false;
-            UpdateStatusText.Text = "Checking…";
+            UpdateStatusText.Text = InfoPanel.Localization.Localizer.Text("Checking…");
             try
             {
                 var update = await Services.UpdateChecker.CheckAsync();
                 if (update == null)
                 {
-                    UpdateStatusText.Text = "You are running the latest version.";
+                    UpdateStatusText.Text = InfoPanel.Localization.Localizer.Text("You are running the latest version.");
                     UpdateBox.IsVisible = false;
                 }
                 else
@@ -60,7 +60,7 @@ namespace InfoPanel.Views.Pages
             }
             catch
             {
-                UpdateStatusText.Text = "Update check failed. Check your connection and try again.";
+                UpdateStatusText.Text = InfoPanel.Localization.Localizer.Text("Update check failed. Check your connection and try again.");
             }
             finally
             {

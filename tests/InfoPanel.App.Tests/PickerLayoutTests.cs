@@ -1,3 +1,4 @@
+using InfoPanel.Localization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
@@ -173,4 +174,28 @@ public sealed class PickerLayoutTests(HeadlessUi ui, ITestOutputHelper output) :
         Assert.True(scroll.Extent.Width <= scroll.Viewport.Width + 0.5, details);
         Assert.True(value.TextLayout.Width <= value.Bounds.Width + 0.5, details);
     }
+    [Fact]
+    public Task SettingsBindsChineseCatalogAndKeepsLanguageNamesRecognizable() => ui.Run(() =>
+    {
+        var previous = Localizer.Instance.Language;
+        try
+        {
+            Localizer.Instance.SetLanguage("zh-CN");
+            var page = new SettingsPage();
+            using var root = HeadlessUi.CreateRoot();
+            root.Content = page;
+            root.Prepare();
+            root.Measure(new Size(1100, 900));
+            root.Arrange(new Rect(0, 0, 1100, 900));
+            root.UpdateLayout();
+            var texts = page.GetVisualDescendants().OfType<TextBlock>().Select(t => t.Text).ToArray();
+            Assert.Contains("设置", texts);
+            Assert.Contains("语言", texts);
+            Assert.Contains("常规", texts);
+            var picker = page.FindControl<ComboBox>("LanguagePicker")!;
+            Assert.Contains(picker.Items.Cast<ComboBoxItem>(), item => Equals(item.Content, "English"));
+            Assert.Contains(picker.Items.Cast<ComboBoxItem>(), item => Equals(item.Content, "简体中文"));
+        }
+        finally { Localizer.Instance.SetLanguage(previous); }
+    });
 }

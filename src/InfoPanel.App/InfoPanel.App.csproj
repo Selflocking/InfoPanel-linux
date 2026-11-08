@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
+    <EmbeddedResource Include="Localization/*.json" LogicalName="InfoPanel.Localization.%(Filename)%(Extension)" />
   </ItemGroup>
 
   <ItemGroup>

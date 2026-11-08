@@ -1,22 +1,23 @@
 <UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:loc="using:InfoPanel.Localization"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="InfoPanel.Views.Pages.AboutPage">
 
     <ScrollViewer>
         <StackPanel Margin="24" Spacing="20" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="About" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="{loc:Tr S4efca0d10c5f}" FontSize="28" FontWeight="SemiBold" />
 
             <StackPanel Spacing="8">
                 <TextBlock x:Name="VersionText" FontSize="16" FontWeight="SemiBold" />
-                <TextBlock Text="InfoPanel for Linux, rebuilt on Avalonia. Based on InfoPanel by habibrehmansg."
+                <TextBlock Text="{loc:Tr S2c0b65a261d7}"
                            FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
                 <StackPanel Orientation="Horizontal" Spacing="12">
-                    <Button Content="Open data folder" Click="OpenDataFolder_Click" />
-                    <Button Content="Open log folder" Click="OpenLogFolder_Click" />
+                    <Button Content="{loc:Tr S24bec7410199}" Click="OpenDataFolder_Click" />
+                    <Button Content="{loc:Tr S4862da00cc97}" Click="OpenLogFolder_Click" />
                 </StackPanel>
                 <StackPanel Spacing="6">
                     <StackPanel Orientation="Horizontal" Spacing="12">
-                        <Button x:Name="CheckUpdatesButton" Content="Check for updates" Click="CheckUpdates_Click" />
+                        <Button x:Name="CheckUpdatesButton" Content="{loc:Tr Sf26f3275e735}" Click="CheckUpdates_Click" />
                         <TextBlock x:Name="UpdateStatusText" VerticalAlignment="Center" FontSize="12"
                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                     </StackPanel>
@@ -24,23 +25,23 @@
                             Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
                         <StackPanel Spacing="8">
                             <TextBlock x:Name="UpdateTitleText" FontWeight="SemiBold" TextWrapping="Wrap" />
-                            <TextBlock Text="What changed:" FontSize="12" FontWeight="SemiBold" />
+                            <TextBlock Text="{loc:Tr S9fe6ae8c9fa7}" FontSize="12" FontWeight="SemiBold" />
                             <ScrollViewer MaxHeight="260">
                                 <TextBlock x:Name="UpdateNotesText" FontSize="11" Opacity="0.85" TextWrapping="Wrap" />
                             </ScrollViewer>
-                            <Button x:Name="UpdateDownloadButton" Content="Open download page" Click="OpenLink_Click" />
+                            <Button x:Name="UpdateDownloadButton" Content="{loc:Tr Sc1c304e33661}" Click="OpenLink_Click" />
                         </StackPanel>
                     </Border>
                 </StackPanel>
                 <WrapPanel>
-                    <Button Content="User guide" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux/blob/main/docs/USER-GUIDE.md" />
-                    <Button Content="Website" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://infopanel.net/" />
-                    <Button Content="GitHub" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux" />
-                    <Button Content="Discord" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://discord.gg/cQnjdMC7Qc" />
-                    <Button Content="Reddit" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://www.reddit.com/r/InfoPanel/" />
-                    <Button Content="Support development ♥" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://buymeacoffee.com/emaspa" />
+                    <Button Content="{loc:Tr S86a2a9ba70bc}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux/blob/main/docs/USER-GUIDE.md" />
+                    <Button Content="{loc:Tr Sb5a229ac8bec}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://infopanel.net/" />
+                    <Button Content="{loc:Tr Sf911e414cf6b}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://github.com/emaspa/InfoPanel-linux" />
+                    <Button Content="{loc:Tr S053bc65874ad}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://discord.gg/cQnjdMC7Qc" />
+                    <Button Content="{loc:Tr Seb0050f72303}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://www.reddit.com/r/InfoPanel/" />
+                    <Button Content="{loc:Tr S2af709a32f98}" Margin="0,0,8,8" Click="OpenLink_Click" Tag="https://buymeacoffee.com/emaspa" />
                 </WrapPanel>
-                <Expander Header="Release notes" FontSize="12">
+                <Expander Header="{loc:Tr S1254829bd999}" FontSize="12">
                     <StackPanel Spacing="4" Margin="0,8,0,0">
                         <TextBlock Text="v0.3.8 alpha: Valkyrie V360 and MC360 LCDs" FontWeight="SemiBold" FontSize="12" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
@@ -56,7 +57,7 @@
                                    Text="On RTX 50 series the hotspot temperature comes from a GPU register the NVIDIA driver only lets root read, and every refused read is logged to the kernel log. InfoPanel probed it at startup, noted it was unavailable, and then kept reading it every second anyway, adding two NVRM lines to dmesg per second. It now probes once and leaves the register alone when the probe fails. Reported by Chris123NT." />
                         <TextBlock Text="v0.3.4 alpha: ASRock Steel Legend 360 LCD support" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="The ASRock Steel Legend 360 LCD (USB 26CE:0A11) is now detected and driven as a 480x480 panel, with udev rules for access without root. It wakes the panel after a full power cycle, and puts it back to sleep when InfoPanel stops. Contributed by Ulfy." />
+                                   Text="{loc:Tr Sbd5c96c4c315}" />
                         <TextBlock Text="v0.3.3 alpha: NVIDIA sensors stop re-initializing every 10 seconds" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="Since 0.3.0 the NVIDIA hotspot, VRAM and voltage interface (NvAPI) was torn down and reopened on every 10-second sensor rescan, adding three log lines each time, about 26,000 a day. It now opens once and is only reopened when the GPU actually changes or the driver reports it lost. A card that rejects an individual query, such as a fan it does not have, now just skips that one reading instead of dropping every NVIDIA sensor, and a missing NVIDIA library is retried once a minute rather than every rescan. NVIDIA resources are also released properly when InfoPanel exits." />
@@ -76,7 +77,7 @@
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="Major UI responsiveness work: overlays no longer run the full profile draw on the compositor's render thread (they blit a frame rendered off-thread), plugin images cache their per-frame resizes like video does, and dashboard thumbnails render off the UI thread without a PNG round-trip. Scrolling and animations stay smooth with overlays and panels active. Profiles gain a Display dropdown on the dashboard tiles, and monitor assignment now identifies displays by output name and native resolution (stable under Wayland/XWayland scaling) instead of scaled X11 bounds. Stored plugin config is applied before plugin initialization, so structural settings like the audio spectrum's band count and image size actually take effect instead of silently running on defaults." />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="The Extras plugins (MangoHud FPS, SMART drive health, Weather, System Info) failed to load when InfoPanel is installed system-wide (AUR package, /opt): their shared config was written next to the plugin assembly, which is read-only there. The config now falls back to the user data directory; an existing config next to the plugin keeps working." />
+                                   Text="{loc:Tr S3714ab449323}" />
                         <TextBlock Text="v0.2.1 alpha: panel frame rates, video loop fix" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="Major frame rate work: profiles with video roughly triple their panel frame rate (frame pacing, per-resolution shared rendering, JPEG encode moved off the render lock, per-frame video resize caching), and looping videos no longer freeze at the loop boundary. Keepalive resends of unchanged content are throttled, fixing a flood that could crash Trofeo bulk panel firmware (recoverable only by replug). udev rules no longer use the plugdev group, which udev 261+ silently rejects, taking panel permissions with it; no group membership is needed anymore. Overlays whose monitor is missing no longer leave a ghost taskbar entry." />
@@ -91,7 +92,7 @@
                                    Text="Thermalright HID panels that share one USB ID (Frozen Warframe SE, Assassin, BA120 and others on 0416:5302) are now identified as the correct model directly at scan time instead of showing as a Trofeo Vision 6.86&quot; until first connect, and a rescan no longer reverts an identified model to the placeholder. Scanning a family's first panel also enables that family's streaming switch automatically, so a new panel only needs its row toggle and a profile to start streaming." />
                         <TextBlock Text="v0.1.7 alpha: GPU fan RPM sensors" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="NVIDIA GPUs now expose real per-fan tachometer readings (Fan 1 RPM, Fan 2 RPM) alongside the duty-cycle percentage, on driver 550 or newer; older drivers keep the percentage only. AMD GPUs gain an equivalent RPM sensor through ROCm, in addition to the RPM already provided by the kernel driver." />
+                                   Text="{loc:Tr Sbc4da74d74eb}" />
                         <TextBlock Text="v0.1.6 alpha: idle plugins power down" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="Plugins whose sensors are unused by any streaming panel, overlay or web view for 5 minutes now stop completely, releasing their background resources (audio capture, network fetches, worker threads), and restart within a second when something uses them again. Their sensors stay listed with last-known values, and configured stopwatch hotkeys keep the stopwatch plugin running." />
@@ -115,16 +116,16 @@
                                    Text="New Jonsbo panel family, both models verified on real hardware: the DS916 (9.16 inch, 462x1920, HLVMAX serial with raw JPEG frames) and the DS339 (376x960, MacroSilicon MS9132 with HID control and bulk UYVY frames). The DS339 shares its USB identity with the VMAX 4.6 inch, so the device scan reads the panel EDID to tell them apart. The VMAX path gains the same Linux protocol fixes (direct hidraw feature reports, UYVY pixel format)." />
                         <TextBlock Text="v0.0.9 alpha: panel options everywhere" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="Every panel family gets the collapsible Panel options section with brightness, per-device target FPS, and JPEG quality where the protocol uses JPEG. Device cards show the native resolution for all models, BeadaPanel cards show friendly model names, and the Thermaltake 6 inch is verified on real hardware (24 fps at 17 ms)." />
+                                   Text="{loc:Tr S6c5f37363e01}" />
                         <TextBlock Text="v0.0.8 alpha: Trofeo HID panel family" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="The Trofeo HID protocol family (6.86 inch and about 15 sibling models) now works: udev rules cover their hidraw nodes, frames stream through the HID interface (the libusb style upgrade cannot work on Linux where the kernel driver owns it), and the device scan no longer aborts when an unreadable HID device is present. Verified on a Trofeo Vision 6.86 inch at 24 fps." />
                         <TextBlock Text="v0.0.7 alpha: stability with multiple panels" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="Fixed a native crash that killed the app seconds after start when a wedged panel failed its init handshake. Two identical Trofeo panels now reconnect cleanly after replug (each task claims its own device instead of both fighting over one), and pressing Scan no longer renames an identified 11.3 inch or 9.16 v2 back to the base model." />
+                                   Text="{loc:Tr S4771d74ab3a3}" />
                         <TextBlock Text="v0.0.6 alpha: serial panel speed, 11.3 inch identification" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="Serial Turing panels (Turzx 5 inch and friends) batch their protocol writes, lifting frame rates toward Windows levels. Trofeo 11.3 inch and 9.16 inch v2 keep their runtime identification: the device card updates live and the model persists across restarts. Disabled devices say disabled instead of idle." />
+                                   Text="{loc:Tr Sed99a31cbb5d}" />
                         <TextBlock Text="v0.0.5 alpha: Turing USB panels" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="USB Turing/TURZX panels stream reliably: the protocol now consumes the device response after every command (frames stalled at zero bytes before), and frames are sent as JPEG like the Windows build, roughly tripling the frame rate. Turing devices get a Panel options section with brightness, per-device target FPS and JPEG quality, portrait strips default to 90 degrees at scan, and cards show the native resolution. Shipped stack traces no longer contain build machine paths." />
@@ -133,7 +134,7 @@
                                    Text="Serial Turing/Turzx and JL panels are now detected: sysfs symlink resolution in the port scan was broken, so no serial panel was ever found. Scanning no longer resets an identified ChiZhu panel (like the Phantom Spirit 120 Vision EVO) to Unknown. Start minimized works. Launching InfoPanel while it is already running brings the window to the front, and minimizing with close-to-tray enabled no longer crashes." />
                         <TextBlock Text="v0.0.3 alpha: shutdown and serial panel fixes" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
-                                   Text="Logout and restart no longer stall while InfoPanel is running: the app exits cleanly when the session ends and close-to-tray no longer intercepts OS shutdown. udev rules now cover the serial tty nodes of Turing/Turzx panels, so they work without dialout group membership. Fixed the tray Exit occasionally leaving the process behind." />
+                                   Text="{loc:Tr Sd95bfcc15e79}" />
                         <TextBlock Text="v0.0.2 alpha: first published build" FontWeight="SemiBold" FontSize="12" Margin="0,8,0,0" />
                         <TextBlock FontSize="11" Opacity="0.75" TextWrapping="Wrap"
                                    Text="Self-contained tarball on GitHub Releases with installer, udev rules and SMART sensor timer. Update checking with release notes and desktop notification. Plugin-rendered images as live display items (Audio Spectrum bundled), program-specific profiles via foreground app detection, per-profile autosave backup restore, refreshing URL images, Thermaltake/ASRock, JL/Hongtai, VMAX and Lian Li panel support, profile and stopwatch hotkeys, plugin configuration UI, and the full 1.4.x designer feature set (glow, gauge mirror, thousands separator, guide items)." />
@@ -142,10 +143,10 @@
                                    Text="New Avalonia 12 UI with a direct-manipulation designer (zoom/pan canvas, undo/redo, layers, live sensor tree). Latest Thermalright/TRCC device support from the Windows fork with USB replug self-healing. Video backgrounds via ffmpeg. Web server, XDG autostart, profile import/export. Profiles remain fully compatible with v1.4 and InfoPanel for Windows." />
                     </StackPanel>
                 </Expander>
-                <Expander Header="Contributors" FontSize="12">
+                <Expander Header="{loc:Tr S350ad433c42f}" FontSize="12">
                     <StackPanel x:Name="ContributorsList" Spacing="4" Margin="0,8,0,0" />
                 </Expander>
-                <Expander Header="Third-party licenses" FontSize="12">
+                <Expander Header="{loc:Tr S0c4ee87a5d79}" FontSize="12">
                     <StackPanel x:Name="LicensesList" Spacing="4" Margin="0,8,0,0" />
                 </Expander>
             </StackPanel>

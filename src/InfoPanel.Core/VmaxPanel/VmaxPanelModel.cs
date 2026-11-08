@@ -6,5 +6,6 @@ namespace InfoPanel.VmaxPanel
         Vmax46Inch,
         ValkyrieV360,
         ValkyrieMc360,
+        ValkyrieVk03,
     }
 }

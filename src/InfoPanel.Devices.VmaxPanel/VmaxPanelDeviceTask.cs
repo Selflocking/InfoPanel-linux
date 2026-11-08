@@ -25,7 +25,7 @@ namespace InfoPanel.Services
         public VmaxPanelDeviceTask(VmaxPanelDevice device)
         {
             _device = device;
-            _frameConsumer.ResendCachedOnSkip = device.Model == VmaxPanelModel.ValkyrieV360;
+            _frameConsumer.ResendCachedOnSkip = device.Model is VmaxPanelModel.ValkyrieV360 or VmaxPanelModel.ValkyrieVk03;
         }
 
         protected override async Task DoWorkAsync(CancellationToken token)
@@ -50,6 +50,13 @@ namespace InfoPanel.Services
                     Logger.Information("VmaxPanelDevice {Device}: Opening USB device (attempt {Retry})",
                         _device, retryCount + 1);
 
+                    if (_device.Model == VmaxPanelModel.ValkyrieVk03)
+                    {
+                        using var vk03 = Vk03UsbDevice.Open(_device.DeviceId);
+                        retryCount = 0;
+                        await RunValkyrieLoop(vk03, token);
+                        continue;
+                    }
                     if (_device.Model == VmaxPanelModel.ValkyrieMc360)
                     {
                         using var mc360 = ValkyrieUsbDevice.Open(_device.DeviceId)
@@ -98,7 +105,7 @@ namespace InfoPanel.Services
             FpsCounter fpsCounter = new(30);
             _device.UpdateRuntimeProperties(isRunning: true, errorMessage: string.Empty);
             // One producer/sender owns the reusable pixel buffer. Only the tested
-            // V360 path resends static frames; experimental panels update on change.
+            // V360 and VK03 paths resend static frames; experimental panels update on change.
             (int Brightness, LCD_ROTATION Rotation, Guid Profile, bool Screen)? lastOptions = null;
             while (!token.IsCancellationRequested)
             {
@@ -118,7 +125,7 @@ namespace InfoPanel.Services
                 }
                 device.SetScreenSwitch(_device.ScreenSwitch);
                 device.KeepAlive();
-                var delay = 1000 / Math.Clamp(_device.TargetFrameRate, 1, 30) - (int)stopwatch.ElapsedMilliseconds;
+                var delay = 1000 / Math.Clamp(_device.TargetFrameRate, _device.Model == VmaxPanelModel.ValkyrieVk03 ? 5 : 1, 30) - (int)stopwatch.ElapsedMilliseconds;
                 if (delay > 0) await Task.Delay(delay, token);
             }
         }
@@ -235,10 +242,13 @@ namespace InfoPanel.Services
                     var resizedBitmap = SKBitmapExtensions.EnsureBitmapSize(bitmap, _panelWidth, _panelHeight, _device.Rotation);
                     try
                     {
-                        var length = resizedBitmap.Width * resizedBitmap.Height * 2;
+                        var length = resizedBitmap.Width * resizedBitmap.Height * (_device.ModelInfo!.UsesBgr888 ? 3 : 2);
                         bool pooled = !_device.ModelInfo!.IsValkyrie;
                         var output = pooled ? ArrayPool<byte>.Shared.Rent(length) : (_rawPixels ??= new byte[length]);
-                        if (!_device.ModelInfo.UsesBgr565)
+                        if (_device.ModelInfo.UsesBgr888)
+                            Vk03Protocol.ConvertRgba(resizedBitmap.GetPixelSpan(), resizedBitmap.Width,
+                                resizedBitmap.Height, resizedBitmap.RowBytes, output, _device.Brightness);
+                        else if (!_device.ModelInfo.UsesBgr565)
                             ToUyvy(resizedBitmap, output, _device.Brightness);
                         else
                             ValkyrieUsbProtocol.ConvertRgba(resizedBitmap.GetPixelSpan(), resizedBitmap.Width,
@@ -313,8 +323,8 @@ namespace InfoPanel.Services
             if (_cachedBlackUyvy == null)
             {
                 // Black in UYVY is Y=16, U=V=128 - an all-zero buffer would be green.
-                _cachedBlackUyvy = new byte[_panelWidth * _panelHeight * 2];
-                for (int i = 0; !_device.ModelInfo!.UsesBgr565 && i < _cachedBlackUyvy.Length; i += 2)
+                _cachedBlackUyvy = new byte[_panelWidth * _panelHeight * (_device.ModelInfo!.UsesBgr888 ? 3 : 2)];
+                for (int i = 0; !_device.ModelInfo!.UsesBgr565 && !_device.ModelInfo.UsesBgr888 && i < _cachedBlackUyvy.Length; i += 2)
                 {
                     _cachedBlackUyvy[i] = 0x80;
                     _cachedBlackUyvy[i + 1] = 0x10;

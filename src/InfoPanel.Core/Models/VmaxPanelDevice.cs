@@ -21,6 +21,7 @@ namespace InfoPanel.Models
 
         partial void OnModelChanged(VmaxPanelModel value)
         {
+            if (value == VmaxPanelModel.ValkyrieVk03 && TargetFrameRate < 5) TargetFrameRate = 5;
             OnPropertyChanged(nameof(ModelInfo));
             OnPropertyChanged(nameof(DisplayWidth));
             OnPropertyChanged(nameof(DisplayHeight));
@@ -53,7 +54,7 @@ namespace InfoPanel.Models
 
         partial void OnTargetFrameRateChanged(int value)
         {
-            var clamped = Math.Clamp(value, 1, 30);
+            var clamped = Math.Clamp(value, Model == VmaxPanelModel.ValkyrieVk03 ? 5 : 1, 30);
             if (value != clamped)
                 TargetFrameRate = clamped;
         }

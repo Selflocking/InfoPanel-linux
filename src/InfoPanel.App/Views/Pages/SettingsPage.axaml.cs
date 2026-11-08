@@ -16,6 +16,8 @@ namespace InfoPanel.Views.Pages
 
             Loaded += (_, _) => LoadFromSettings();
 
+            LanguagePicker.SelectionChanged += (_, _) => Apply(s => s.Language = (LanguagePicker.SelectedItem as ComboBoxItem)?.Tag as string ?? "");
+
             AutoStartToggle.IsCheckedChanged += (_, _) => Apply(s => s.AutoStart = AutoStartToggle.IsChecked == true);
             AutoStartDelay.ValueChanged += (_, _) => Apply(s => s.AutoStartDelay = (int)(AutoStartDelay.Value ?? 5));
             StartMinimizedToggle.IsCheckedChanged += (_, _) => Apply(s => s.StartMinimized = StartMinimizedToggle.IsChecked == true);
@@ -41,6 +43,7 @@ namespace InfoPanel.Views.Pages
             try
             {
                 var settings = app.Host.Settings;
+                LanguagePicker.SelectedIndex = settings.Language switch { "en" => 1, "zh-CN" => 2, _ => 0 };
                 AutoStartToggle.IsChecked = settings.AutoStart;
                 AutoStartDelay.Value = settings.AutoStartDelay;
                 StartMinimizedToggle.IsChecked = settings.StartMinimized;

@@ -114,7 +114,7 @@ namespace InfoPanel.Views
             var deviceCount = app?.Host.Settings.ThermalrightPanelDevices.Count(d => d.Enabled)
                 + app?.Host.Settings.BeadaPanelDevices.Count(d => d.Enabled)
                 + app?.Host.Settings.TuringPanelDevices.Count(d => d.Enabled);
-            StatusText.Text = $"{deviceCount} devices · {sensorCount} sensors";
+            StatusText.Text = Localization.Localizer.Text("{0} devices · {1} sensors", deviceCount ?? 0, sensorCount);
         }
 
         /// <summary>Selects a nav destination by tag (used by the tray menu).</summary>

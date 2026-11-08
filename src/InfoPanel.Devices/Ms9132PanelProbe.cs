@@ -8,6 +8,30 @@ public static class Ms9132PanelProbe
 {
     private static readonly ILogger Logger = Log.ForContext(typeof(Ms9132PanelProbe));
 
+    /// <summary>EDID monitor-name descriptor; a shared size or USB ID is not a model identity.</summary>
+    public static string? ReadPanelName(string hidPath)
+    {
+        try
+        {
+            using var raw = LinuxHidRawFeature.Open(hidPath);
+            if (raw == null) return null;
+            byte Read(int offset)
+            {
+                int address = 0xC000 + offset;
+                raw.SetFeature([0xB5, (byte)(address >> 8), (byte)address, 0, 0, 0, 0, 0]);
+                return raw.GetFeature()[4];
+            }
+            for (int descriptor = 54; descriptor <= 108; descriptor += 18)
+            {
+                if (Read(descriptor) != 0 || Read(descriptor + 1) != 0 || Read(descriptor + 2) != 0 || Read(descriptor + 3) != 0xFC)
+                    continue;
+                return System.Text.Encoding.ASCII.GetString(Enumerable.Range(descriptor + 5, 13).Select(Read).ToArray()).Trim(' ', '\n', '\r', '\0');
+            }
+        }
+        catch (Exception ex) { Logger.Debug(ex, "Ms9132PanelProbe: panel-name read failed"); }
+        return null;
+    }
+
     public static (int Width, int Height)? ReadSize(string hidPath)
     {
         try

@@ -75,7 +75,7 @@ KERNEL=="hidraw*", ATTRS{idVendor}=="26ce", ATTRS{idProduct}=="0a11", MODE="0666
 # access without dialout membership; both are Artinchip 33c3 SKUs)
 SUBSYSTEM=="tty", ATTRS{idVendor}=="33c3", MODE="0666"
 
-# VMAX / AuyiHomu 4.6" LCD, Jonsbo DS339 and Valkyrie V360 (MacroSilicon MS9132)
+# VMAX / AuyiHomu 4.6" LCD, Jonsbo DS339 and Valkyrie V360 / VK03 / VN03M (MacroSilicon MS912x)
 SUBSYSTEM=="usb", ATTR{idVendor}=="345f", ATTR{idProduct}=="9132", MODE="0666"
 KERNEL=="hidraw*", ATTRS{idVendor}=="345f", ATTRS{idProduct}=="9132", MODE="0666"
 

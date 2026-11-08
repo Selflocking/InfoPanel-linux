@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -7,6 +7,9 @@ namespace InfoPanel.Models
 {
     public partial class Settings : ObservableObject
     {
+        [ObservableProperty]
+        private string _language = "";
+
         [ObservableProperty]
         private float _uiWidth = 1300;
 

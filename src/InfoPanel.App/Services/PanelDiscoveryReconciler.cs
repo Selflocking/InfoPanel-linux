@@ -37,9 +37,9 @@ public static class PanelDiscoveryReconciler
             var family = isValkyrie ? settings.ValkyriePanelDevices : settings.VmaxPanelDevices;
             var wasEmpty = family.Count == 0;
             var existing = family.FirstOrDefault(d => Same(d.DeviceId, found.DeviceId));
-            // Only confirmed V360 geometry permits removing the entries earlier releases
+            // Confirmed Valkyrie geometry permits removing the entries earlier releases
             // created for it: a DS339 when its EDID was unreadable, otherwise a VMAX 4.6".
-            var isV360 = found.Model == VmaxPanelModel.ValkyrieV360;
+            var isV360 = found.Model is VmaxPanelModel.ValkyrieV360 or VmaxPanelModel.ValkyrieVk03;
             var stale = isV360
                 ? settings.JonsboPanelDevices.FirstOrDefault(d => d.Model == JonsboPanelModel.DS339 && Same(d.DeviceId, found.DeviceId))
                 : null;
@@ -51,12 +51,12 @@ public static class PanelDiscoveryReconciler
                 existing = new VmaxPanelDevice
                 {
                     DeviceId = found.DeviceId, DeviceLocation = found.DeviceLocation, Model = found.Model,
-                    TargetFrameRate = isValkyrie ? 10 : 1,
+                    TargetFrameRate = found.Model == VmaxPanelModel.ValkyrieVk03 ? 5 : isValkyrie ? 10 : 1,
                     // Preserve assignments, but don't start a previously disabled device.
                     ProfileGuid = staleVmax?.ProfileGuid ?? stale?.ProfileGuid ?? Guid.Empty,
                     Enabled = staleVmax?.Enabled ?? stale?.Enabled ?? false,
                     Brightness = staleVmax?.Brightness ?? stale?.Brightness ?? 99,
-                    Rotation = staleVmax?.Rotation ?? default,
+                    Rotation = staleVmax?.Rotation ?? (found.Model == VmaxPanelModel.ValkyrieVk03 ? LCD_ROTATION.Rotate90FlipNone : default),
                 };
                 family.Add(existing);
                 added++;

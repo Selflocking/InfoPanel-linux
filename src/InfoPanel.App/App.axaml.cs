@@ -95,6 +95,7 @@ namespace InfoPanel
 
                 _host = new AppHost();
                 _host.Initialize();
+                Localization.Localizer.Instance.SetLanguage(_host.Settings.Language);
                 _cts = new CancellationTokenSource();
 
                 _ = Task.Run(async () =>

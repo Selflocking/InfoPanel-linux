@@ -64,6 +64,9 @@ namespace InfoPanel.VmaxPanel
             size is (376, 960) ? null // Jonsbo DS339
                 : ModelFromSize(size) ?? VmaxPanelModelDatabase.Models[VmaxPanelModel.Vmax46Inch];
 
+        public static bool IsVk03Panel((int Width, int Height)? size, string? name) =>
+            size == (360, 960) && string.Equals(name, "MCVKC03", StringComparison.OrdinalIgnoreCase);
+
         private static string SafeSerial(HidDevice hid)
         {
             try { return hid.GetSerialNumber() ?? ""; } catch { return ""; }
@@ -99,12 +102,17 @@ namespace InfoPanel.VmaxPanel
                     issues?.Add("MS9132 panel could not be identified. Check USB/HID permissions, then scan again.");
                     continue;
                 }
+                if (size.Value == (360, 960) && !IsVk03Panel(size, Ms9132PanelProbe.ReadPanelName(hid!.DevicePath)))
+                {
+                    issues?.Add("The 360x960 MS912x panel is not a confirmed MCVKC03; skipping unknown hardware.");
+                    continue;
+                }
                 var modelInfo = ClassifyMs9132(size.Value);
                 if (modelInfo == null) continue;
-                if (modelInfo.Model == VmaxPanelModel.ValkyrieV360 && string.IsNullOrEmpty(serial))
+                if ((modelInfo.Model is VmaxPanelModel.ValkyrieV360 or VmaxPanelModel.ValkyrieVk03) && string.IsNullOrEmpty(serial))
                 {
-                    // The V360 driver pairs its HID and video interfaces by serial.
-                    issues?.Add("Valkyrie V360 reports no USB serial, so it cannot be paired safely.");
+                    // Valkyrie drivers pair their HID and video interfaces by serial.
+                    issues?.Add("Valkyrie panel reports no USB serial, so it cannot be paired safely.");
                     continue;
                 }
 
@@ -114,7 +122,7 @@ namespace InfoPanel.VmaxPanel
                 var deviceId = deviceIdValue as string ?? deviceReg.DevicePath;
                 var legacyDeviceId = deviceId;
                 var location = locationValue as string ?? deviceReg.SymbolicName ?? string.Empty;
-                if (modelInfo.Model == VmaxPanelModel.ValkyrieV360)
+                if (modelInfo.Model is VmaxPanelModel.ValkyrieV360 or VmaxPanelModel.ValkyrieVk03)
                 {
                     deviceId = $@"USB\VID_{vendorId:X4}&PID_{productId:X4}\{serial}";
                     location = serial;

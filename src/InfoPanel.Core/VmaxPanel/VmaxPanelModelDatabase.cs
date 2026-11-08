@@ -25,6 +25,14 @@ namespace InfoPanel.VmaxPanel
                 VendorId = VMAX_VENDOR_ID,
                 ProductId = VMAX_PRODUCT_ID_46INCH,
             },
+            [VmaxPanelModel.ValkyrieVk03] = new VmaxPanelModelInfo
+            {
+                Model = VmaxPanelModel.ValkyrieVk03,
+                Name = "Valkyrie VK03 / VN03M (MCVKC03)",
+                Width = 360, Height = 960,
+                VendorId = VMAX_VENDOR_ID, ProductId = VMAX_PRODUCT_ID_46INCH,
+                UsesBgr888 = true,
+            },
             [VmaxPanelModel.ValkyrieV360] = new VmaxPanelModelInfo
             {
                 Model = VmaxPanelModel.ValkyrieV360,

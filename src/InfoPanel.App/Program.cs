@@ -9,6 +9,7 @@ namespace InfoPanel
         [STAThread]
         public static int Main(string[] args)
         {
+            Utils.LibUsbNativeLibrary.Configure();
             var verbose = args.Contains("--verbose");
 
             Log.Logger = new LoggerConfiguration()
