@@ -14,6 +14,7 @@ namespace InfoPanel
 
         private FileStream? _instanceLock;
         private MainWindow? _mainWindow;
+        private SystemUiFont? _systemUiFont;
         private AppHost? _host;
         private CancellationTokenSource? _cts;
         private readonly List<System.Runtime.InteropServices.PosixSignalRegistration> _signalRegistrations = [];
@@ -23,6 +24,7 @@ namespace InfoPanel
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+            _systemUiFont = new SystemUiFont(this);
         }
 
         public override void OnFrameworkInitializationCompleted()
@@ -232,6 +234,7 @@ namespace InfoPanel
 
         private void OnShutdownRequested(object? sender, ShutdownRequestedEventArgs e)
         {
+            _systemUiFont?.Dispose();
             Logger.Information("Shutdown requested");
             _cts?.Cancel();
             DisplayWindowManager.Instance.CloseAll();

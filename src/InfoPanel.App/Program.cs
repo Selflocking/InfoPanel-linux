@@ -68,7 +68,7 @@ namespace InfoPanel
             return AppBuilder.Configure<App>()
                 .UsePlatformDetect()
                 .With(x11)
-                .WithInterFont()
+                .With(new Avalonia.Media.FontManagerOptions { DefaultFamilyName = Utils.SystemUiFont.Read().Family })
                 .LogToTrace();
         }
     }

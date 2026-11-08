@@ -7,6 +7,10 @@
 
     <Application.Styles>
         <sty:FluentAvaloniaTheme CustomAccentColor="#14B8A6" />
+        <Style Selector="Window">
+            <Setter Property="FontFamily" Value="{DynamicResource ContentControlThemeFontFamily}" />
+            <Setter Property="FontSize" Value="{DynamicResource ControlContentThemeFontSize}" />
+        </Style>
     </Application.Styles>
 
     <TrayIcon.Icons>

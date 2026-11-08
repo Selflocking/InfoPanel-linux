@@ -39,3 +39,14 @@ and persistence tests. Do not translate enum identifiers or XML element names.
 `LocalizationTests` checks catalog parity, format arguments, fallback and settings
 compatibility. `PickerLayoutTests.SettingsBindsChineseCatalogAndKeepsLanguageNamesRecognizable` builds the actual Settings XAML with the
 Chinese catalog to verify translated bindings and the language selector.
+
+## Desktop interface fonts
+
+The interface follows GNOME's `org.gnome.desktop.interface font-name` setting,
+including point-to-DIP size conversion. Changes update the application through
+`gsettings monitor` without a restart. If GNOME settings cannot be read,
+Fontconfig's default sans-serif family is used. Other desktop-specific font
+settings are not read directly. Missing utilities fall back to generic sans-serif.
+Theme icon fonts and explicit monospace log fonts retain their own families.
+The screen profile renderer keeps each profile item's explicitly selected font;
+changing the interface font does not rewrite saved profiles.

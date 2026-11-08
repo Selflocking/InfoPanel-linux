@@ -198,4 +198,35 @@ public sealed class PickerLayoutTests(HeadlessUi ui, ITestOutputHelper output) :
         }
         finally { Localizer.Instance.SetLanguage(previous); }
     });
+
+    [Fact]
+    public Task SystemFontResourcesUpdateControlFamiliesAndSizes() => ui.Run(() =>
+    {
+        var resources = Application.Current!.Resources;
+        var familyKey = "ContentControlThemeFontFamily";
+        var sizeKey = "ControlContentThemeFontSize";
+        bool hadFamily = resources.TryGetValue(familyKey, out var oldFamily);
+        bool hadSize = resources.TryGetValue(sizeKey, out var oldSize);
+        try
+        {
+            InfoPanel.Utils.SystemUiFont.ApplyResources(Application.Current!, new("Ubuntu Sans", 44.0 / 3));
+            var button = new Button { Content = "System font" };
+            using var root = HeadlessUi.CreateRoot();
+            root.Content = button;
+            root.Prepare();
+            root.Measure(new Size(400, 100));
+            root.Arrange(new Rect(0, 0, 400, 100));
+            root.UpdateLayout();
+            Assert.Equal("Ubuntu Sans", button.FontFamily.Name);
+            Assert.Equal(44.0 / 3, button.FontSize, 6);
+            InfoPanel.Utils.SystemUiFont.ApplyResources(Application.Current!, new("Noto Sans", 16));
+            Assert.Equal("Noto Sans", button.FontFamily.Name);
+            Assert.Equal(16, button.FontSize);
+        }
+        finally
+        {
+            if (hadFamily) resources[familyKey] = oldFamily; else resources.Remove(familyKey);
+            if (hadSize) resources[sizeKey] = oldSize; else resources.Remove(sizeKey);
+        }
+    });
 }
